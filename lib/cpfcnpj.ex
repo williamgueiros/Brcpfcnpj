@@ -55,8 +55,8 @@ defmodule Cpfcnpj do
 	end
 	
     defp mult_sum(algs, cpfcnpj) do
-		number_str = cpfcnpj |> String.codepoints |> Enum.with_index
-		mult = Enum.map number_str, fn {k, v} -> String.to_integer(k) * Enum.at(algs,v) end
+		mult = cpfcnpj |> String.codepoints |> Enum.with_index
+		|> Enum.map fn {k, v} -> String.to_integer(k) * Enum.at(algs,v) end
 		Enum.reduce(mult, 0, &+/2)
     end
 
