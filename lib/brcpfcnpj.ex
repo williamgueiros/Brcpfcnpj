@@ -39,11 +39,15 @@ defmodule Brcpfcnpj do
 
     ## Exemplos
 
-		iex(7)> cnpj = %Cnpj{number: "69103604000160"}
-	%Cnpj{number: "69103604000160", tp_data: :cnpj}
-		iex(8)> Brcpfcnpj.cnpj_valid?(cnpj)           
-	true
+		iex(9)>cpf = %Cpf{number: "11144477735"}      
+	%Cpf{number: "11144477735", tp_data: :cpf}
+		iex(10)>Brcpfcnpj.cpf_format(cpf)  
+	"111.444.777-35"
 
+		iex(11)>cpf = %Cpf{number: "11144477734"}
+	%Cpf{number: "11144477734", tp_data: :cpf}
+		iex(12)>Brcpfcnpj.cpf_format(cpf)  
+	nil
     """
 	
 	def cpf_format(cpf=%Cpf{}) do
@@ -56,10 +60,11 @@ defmodule Brcpfcnpj do
 
     ## Exemplos
 
-		iex(7)> cnpj = %Cnpj{number: "69103604000160"}
-	%Cnpj{number: "69103604000160", tp_data: :cnpj}
-		iex(8)> Brcpfcnpj.cnpj_valid?(cnpj)           
-	true
+	cnpj = %Cnpj{number: "69103604000160"}
+	Brcpfcnpj.cnpj_format(cnpj) # ==>"69.103.604/0001-60"
+
+	cnpj = %Cnpj{number: "69103604000161"}
+	Brcpfcnpj.cnpj_format(cnpj) # ==> nil
 
     """
 	
