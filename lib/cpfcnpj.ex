@@ -1,5 +1,5 @@
 defmodule Cpfcnpj do
-	@moduledoc ~S"""
+	@moduledoc """
 	Modulo responsavel pro realizar todos os calculos de validacao
 	
 	exemplo 
@@ -77,7 +77,17 @@ defmodule Cpfcnpj do
 		|> character_calc 
 		|> Integer.to_string
     end
-	
+
+    @doc """
+    Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
+	Caso seja invalido retorna nil
+
+    ## Exemplos
+		iex(12)> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
+	"69.103.604/0001-60"
+
+    """
+		
 	def format_number(number_in) do
 		if valid?(number_in)do
 			tp_cpfcnpj={elem(number_in,0),String.replace(elem(number_in,1), ~r/[^0-9]/, "")}
