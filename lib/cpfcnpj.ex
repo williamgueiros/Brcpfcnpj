@@ -73,8 +73,7 @@ defmodule Cpfcnpj do
 		end
 		
 		sum = mult_sum(array, cpfcnpj)
-		
-		rem(sum,@division)
+		|> rem(@division)
 		|> character_calc 
 		|> Integer.to_string
     end
