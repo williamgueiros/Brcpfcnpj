@@ -28,6 +28,8 @@ defmodule Brcpfcnpj.Mixfile do
 	
   defp package do
      [files: ~w(lib test config mix.exs README*),
+	 contributors: ["William Gueiros"],
+	 licenses: ["Unlicense"],
 	 links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"}]
   end	
 
