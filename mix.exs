@@ -37,6 +37,6 @@ defmodule Brcpfcnpj.Mixfile do
     end
 	
   defp package do
-     links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"]
+     [links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"]
   end	
 end
