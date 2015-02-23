@@ -72,7 +72,7 @@ defmodule Cpfcnpj do
 			{:cnpj,:second} -> array=@cnpj_algs_2
 		end
 		
-		sum = mult_sum(array, cpfcnpj)
+		mult_sum(array, cpfcnpj)
 		|> rem(@division)
 		|> character_calc 
 		|> Integer.to_string
