@@ -27,4 +27,16 @@ defmodule Brcpfcnpj.Mixfile do
   defp deps do
     []
   end
+  
+  defp description do
+      """
+      Valida Cpf/Cnpj e Formatar em String caso necessario
+	  
+	  Number format and Validate, to the documents brazilians (CPF/CNPJ)
+      """
+    end
+	
+  defp package do
+     links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"]
+  end	
 end
