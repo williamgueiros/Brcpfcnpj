@@ -2,12 +2,11 @@ defmodule Cpfcnpj do
 	@moduledoc """
 	Modulo responsavel pro realizar todos os calculos de validacao
 	
-	exemplo 
-	cnpj:
-			iex(9)> Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
+	exemplos:
+	
+		iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
 		true
-	cpf:
-			iex(11)> Cpfcnpj.valid?({:cpf,"111.444.777-35"})       
+		iex>Cpfcnpj.valid?({:cpf,"111.444.777-35"})       
 		true
 	
 	Com ou sem os caracteres especiais os mesmos serao validados
@@ -83,8 +82,8 @@ defmodule Cpfcnpj do
 	Caso seja invalido retorna nil
 
     ## Exemplos
-		iex(12)> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
-	"69.103.604/0001-60"
+		iex> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
+		"69.103.604/0001-60"
 
     """
 		

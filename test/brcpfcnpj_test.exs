@@ -1,6 +1,7 @@
 defmodule BrcpfcnpjTest do
 	use ExUnit.Case
 	doctest Brcpfcnpj
+	doctest Cpfcnpj
   
 	test "should return the formated cpf" do
 		assert Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"}) =="111.444.777-35"
