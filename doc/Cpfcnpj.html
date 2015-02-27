@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cpfcnpj</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="css/elixir.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/highlight.pack.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      hljs.initHighlightingOnLoad();
+      hljs.configure({languages: []}); //disable autodetect
+    </script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <section id="content">
+      <div class="breadcrumbs">brcpfcnpj v0.0.4 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Cpfcnpj.html">Cpfcnpj</a></div>
+      <h1>
+        Cpfcnpj
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+      </ul>
+
+      
+        <section id="moduledoc" class="docstring">
+          <p>Modulo responsavel pro realizar todos os calculos de validacao</p>
+<p>exemplos:</p>
+<pre><code class="iex elixir">iex&gt;Cpfcnpj.valid?({:cnpj,&quot;69.103.604/0001-60&quot;})
+true
+iex&gt;Cpfcnpj.valid?({:cpf,&quot;111.444.777-35&quot;})       
+true</code></pre>
+<p>Com ou sem os caracteres especiais os mesmos serao validados</p>
+
+        </section>
+      
+
+      
+
+      
+        <h2 id="summary">Summary<span class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></span></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#format_number/1">format_number(number_in)</a></td>
+  
+    <td class="summary_synopsis"><p>Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
+Caso seja invalido retorna nil</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#valid?/1">valid?(number_in)</a></td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+        <section id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <section class="detail">
+  <div class="detail_header" id="format_number/1">
+    <span class="signature"><strong>format_number(number_in)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#format_number/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    <p>Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
+Caso seja invalido retorna nil</p>
+<h2>Exemplos</h2>
+<p>iex&gt; Cpfcnpj.format_number({:cnpj,”69.103.604/0001-60”})
+“69.103.604/0001-60”</p>
+
+  </section>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="valid?/1">
+    <span class="signature"><strong>valid?(number_in)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#valid?/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+  
+</section>
+
+        </section>
+      
+
+      
+
+      
+    </section>
+  </body>
+</html>

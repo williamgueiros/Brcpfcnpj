@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Brcpfcnpj</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="css/elixir.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/highlight.pack.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      hljs.initHighlightingOnLoad();
+      hljs.configure({languages: []}); //disable autodetect
+    </script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <section id="content">
+      <div class="breadcrumbs">brcpfcnpj v0.0.4 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Brcpfcnpj.html">Brcpfcnpj</a></div>
+      <h1>
+        Brcpfcnpj
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+      </ul>
+
+      
+
+      
+
+      
+        <h2 id="summary">Summary<span class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></span></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#cnpj_format/1">cnpj_format(cnpj)</a></td>
+  
+    <td class="summary_synopsis"><p>Valida o Cnpj e retorna uma String do Cnpj formatado 
+Caso seja invalido retorna nil</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#cnpj_valid?/1">cnpj_valid?(cnpj)</a></td>
+  
+    <td class="summary_synopsis"><p>Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+forca o desenvolvedor passar os parametros de forma correta</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#cpf_format/1">cpf_format(cpf)</a></td>
+  
+    <td class="summary_synopsis"><p>Valida o Cpf e retorna uma String do Cpf formatado 
+Caso seja invalido retorna nil</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#cpf_valid?/1">cpf_valid?(cpf)</a></td>
+  
+    <td class="summary_synopsis"><p>Valida Cpf, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+forca o desenvolvedor passar os parametros de forma correta</p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+        <section id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <section class="detail">
+  <div class="detail_header" id="cnpj_format/1">
+    <span class="signature"><strong>cnpj_format(cnpj)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#cnpj_format/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    <p>Valida o Cnpj e retorna uma String do Cnpj formatado 
+Caso seja invalido retorna nil</p>
+<h2>Exemplos</h2>
+<p>iex&gt;cnpjOk = %Cnpj{number: “69103604000160”}
+iex&gt;Brcpfcnpj.cnpj_format(cnpjOk)
+“69.103.604/0001-60”</p>
+<p>iex&gt;cnpjWrong = %Cnpj{number: “69103604000161”}
+iex&gt; Brcpfcnpj.cnpj_format(cnpjWrong)
+nil</p>
+
+  </section>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="cnpj_valid?/1">
+    <span class="signature"><strong>cnpj_valid?(cnpj)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#cnpj_valid?/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    <p>Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+forca o desenvolvedor passar os parametros de forma correta</p>
+<h2>Exemplos</h2>
+<p>iex&gt;cnpj = %Cnpj{number: “69103604000160”}
+iex&gt; Brcpfcnpj.cnpj_valid?(cnpj)           
+true</p>
+
+  </section>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="cpf_format/1">
+    <span class="signature"><strong>cpf_format(cpf)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#cpf_format/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    <p>Valida o Cpf e retorna uma String do Cpf formatado 
+Caso seja invalido retorna nil</p>
+<h2>Exemplos</h2>
+<p>iex&gt;cpfOk = %Cpf{number: “11144477735”}
+iex&gt;Brcpfcnpj.cpf_format(cpfOk)  
+“111.444.777-35”</p>
+<p>iex&gt;cpfWrong = %Cpf{number: “11144477734”}
+iex&gt;Brcpfcnpj.cpf_format(cpfWrong)  
+nil</p>
+
+  </section>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="cpf_valid?/1">
+    <span class="signature"><strong>cpf_valid?(cpf)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#cpf_valid?/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    <p>Valida Cpf, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+forca o desenvolvedor passar os parametros de forma correta</p>
+<h2>Exemplos</h2>
+<p>iex&gt; cpf = %Cpf{number: “11144477735”}
+iex&gt; Brcpfcnpj.cpf_valid?(cpf)        
+true</p>
+
+  </section>
+  
+</section>
+
+        </section>
+      
+
+      
+
+      
+    </section>
+  </body>
+</html>

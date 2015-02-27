@@ -3,7 +3,7 @@ defmodule Brcpfcnpj.Mixfile do
 
   def project do
     [app: :brcpfcnpj,
-     version: "0.0.3",
+     version: "0.0.4",
      elixir: "~> 1.0",
      description: description,
      package: package,
@@ -15,7 +15,8 @@ defmodule Brcpfcnpj.Mixfile do
   end
 
   defp deps do
-    []
+    [{:earmark, "~> 0.1", only: :dev},
+   {:ex_doc, "~> 0.7", only: :dev}]
   end
   
   defp description do
