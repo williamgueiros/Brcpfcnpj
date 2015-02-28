@@ -44,17 +44,6 @@
       </ul>
 
       
-        <section id="moduledoc" class="docstring">
-          <p>Modulo responsavel pro realizar todos os calculos de validacao</p>
-<p>exemplos:</p>
-<pre><code class="iex elixir">iex&gt;Cpfcnpj.valid?({:cnpj,&quot;69.103.604/0001-60&quot;})
-true
-iex&gt;Cpfcnpj.valid?({:cpf,&quot;111.444.777-35&quot;})       
-true</code></pre>
-<p>Com ou sem os caracteres especiais os mesmos serao validados</p>
-
-        </section>
-      
 
       
 
@@ -71,6 +60,9 @@ Caso seja invalido retorna nil</p>
 </tr>
 <tr>
   <td class="summary_signature"><a href="#valid?/1">valid?(number_in)</a></td>
+  
+    <td class="summary_synopsis"><p>Modulo responsavel pro realizar todos os calculos de validacao</p>
+</td>
   
 </tr>
 
@@ -96,8 +88,8 @@ Caso seja invalido retorna nil</p>
     <p>Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
 Caso seja invalido retorna nil</p>
 <h2>Exemplos</h2>
-<p>iex&gt; Cpfcnpj.format_number({:cnpj,”69.103.604/0001-60”})
-“69.103.604/0001-60”</p>
+<pre><code class="iex elixir">iex&gt; Cpfcnpj.format_number({:cnpj,&quot;69.103.604/0001-60&quot;})
+&quot;69.103.604/0001-60&quot;</code></pre>
 
   </section>
   
@@ -113,7 +105,14 @@ Caso seja invalido retorna nil</p>
   </div>
   
   <section class="docstring">
-    
+    <p>Modulo responsavel pro realizar todos os calculos de validacao</p>
+<p>exemplos:</p>
+<pre><code class="iex elixir">iex&gt;Cpfcnpj.valid?({:cnpj,&quot;69.103.604/0001-60&quot;})
+   true
+   iex&gt;Cpfcnpj.valid?({:cpf,&quot;111.444.777-35&quot;})       
+   true</code></pre>
+<p>Com ou sem os caracteres especiais os mesmos serao validados</p>
+
   </section>
   
 </section>

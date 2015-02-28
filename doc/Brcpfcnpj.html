@@ -44,6 +44,23 @@
       </ul>
 
       
+        <section id="moduledoc" class="docstring">
+          <p>Valida Cpf/Cnpj e Formatar em String caso necessario </p>
+<ol>
+<li>O formato da string, que deve seguir o padrão xx.xxx.xxx/xxxx-xx, onde ‘x’ pode ser qualquer dígito de 0 a 9 e os traços (-), barra (/) e pontos (.) <em>são opcionais</em>.
+</li>
+<li>O conteúdo numérico desta string, que é validado através do cálculo do ‘módulo 11’ dos dígitos que compõem a string.
+</li>
+</ol>
+<p>exemplos:</p>
+<pre><code class="iex elixir">iex&gt;Brcpfcnpj.cpf_valid?(%Cpf{number: &quot;111.444.777-35&quot;})        
+true
+iex&gt;Brcpfcnpj.cpf_format(%Cpf{number: &quot;11144477735&quot;})  
+&quot;111.444.777-35&quot;</code></pre>
+<p>Com ou sem os caracteres especiais os mesmos serao validados</p>
+
+        </section>
+      
 
       
 
@@ -61,7 +78,7 @@ Caso seja invalido retorna nil</p>
 <tr>
   <td class="summary_signature"><a href="#cnpj_valid?/1">cnpj_valid?(cnpj)</a></td>
   
-    <td class="summary_synopsis"><p>Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+    <td class="summary_synopsis"><p>Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com a estrutura correta.
 forca o desenvolvedor passar os parametros de forma correta</p>
 </td>
   
@@ -77,7 +94,7 @@ Caso seja invalido retorna nil</p>
 <tr>
   <td class="summary_signature"><a href="#cpf_valid?/1">cpf_valid?(cpf)</a></td>
   
-    <td class="summary_synopsis"><p>Valida Cpf, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+    <td class="summary_synopsis"><p>Valida Cpf, realiza a chamda ao modulo Cpfcnpj com a estrutura correta.
 forca o desenvolvedor passar os parametros de forma correta</p>
 </td>
   
@@ -104,13 +121,11 @@ forca o desenvolvedor passar os parametros de forma correta</p>
   <section class="docstring">
     <p>Valida o Cnpj e retorna uma String do Cnpj formatado 
 Caso seja invalido retorna nil</p>
-<h2>Exemplos</h2>
-<p>iex&gt;cnpjOk = %Cnpj{number: “69103604000160”}
-iex&gt;Brcpfcnpj.cnpj_format(cnpjOk)
-“69.103.604/0001-60”</p>
-<p>iex&gt;cnpjWrong = %Cnpj{number: “69103604000161”}
-iex&gt; Brcpfcnpj.cnpj_format(cnpjWrong)
-nil</p>
+<p>Exemplos</p>
+<pre><code class="iex elixir">iex&gt;Brcpfcnpj.cnpj_format(%Cnpj{number: &quot;69103604000160&quot;})
+&quot;69.103.604/0001-60&quot;
+iex&gt; Brcpfcnpj.cnpj_format(%Cnpj{number: &quot;69103604000161&quot;})
+nil</code></pre>
 
   </section>
   
@@ -126,12 +141,13 @@ nil</p>
   </div>
   
   <section class="docstring">
-    <p>Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+    <p>Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com a estrutura correta.
 forca o desenvolvedor passar os parametros de forma correta</p>
-<h2>Exemplos</h2>
-<p>iex&gt;cnpj = %Cnpj{number: “69103604000160”}
-iex&gt; Brcpfcnpj.cnpj_valid?(cnpj)           
-true</p>
+<p>Exemplos</p>
+<pre><code class="iex elixir">iex&gt;Brcpfcnpj.cnpj_valid?(%Cnpj{number: &quot;69103604000160&quot;})           
+true
+iex&gt;Brcpfcnpj.cnpj_valid?(%Cnpj{number: &quot;69.103.604/0001-60&quot;})           
+true</code></pre>
 
   </section>
   
@@ -149,13 +165,11 @@ true</p>
   <section class="docstring">
     <p>Valida o Cpf e retorna uma String do Cpf formatado 
 Caso seja invalido retorna nil</p>
-<h2>Exemplos</h2>
-<p>iex&gt;cpfOk = %Cpf{number: “11144477735”}
-iex&gt;Brcpfcnpj.cpf_format(cpfOk)  
-“111.444.777-35”</p>
-<p>iex&gt;cpfWrong = %Cpf{number: “11144477734”}
-iex&gt;Brcpfcnpj.cpf_format(cpfWrong)  
-nil</p>
+<p>Exemplos</p>
+<pre><code class="iex elixir">iex&gt;Brcpfcnpj.cpf_format(%Cpf{number: &quot;11144477735&quot;})  
+&quot;111.444.777-35&quot;
+iex&gt;Brcpfcnpj.cpf_format(%Cpf{number: &quot;11144477734&quot;})  
+nil</code></pre>
 
   </section>
   
@@ -171,12 +185,14 @@ nil</p>
   </div>
   
   <section class="docstring">
-    <p>Valida Cpf, realiza a chamda ao modulo Cpfcnpj com aos metodos de formar correta.
+    <p>Valida Cpf, realiza a chamda ao modulo Cpfcnpj com a estrutura correta.
 forca o desenvolvedor passar os parametros de forma correta</p>
-<h2>Exemplos</h2>
-<p>iex&gt; cpf = %Cpf{number: “11144477735”}
-iex&gt; Brcpfcnpj.cpf_valid?(cpf)        
-true</p>
+<p>exemplos:</p>
+<pre><code class="iex elixir">iex&gt;Brcpfcnpj.cpf_valid?(%Cpf{number: &quot;11144477735&quot;})
+true
+iex&gt;Brcpfcnpj.cpf_valid?(%Cpf{number: &quot;111.444.777-35&quot;})
+true</code></pre>
+<p>Com ou sem os caracteres especiais os mesmos serao validados</p>
 
   </section>
   
