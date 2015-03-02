@@ -25,7 +25,7 @@
     </script>
 
     <section id="content">
-      <div class="breadcrumbs">brcpfcnpj v0.0.6 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Cpfcnpj.html">Cpfcnpj</a></div>
+      <div class="breadcrumbs">brcpfcnpj v0.0.7 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Cpfcnpj.html">Cpfcnpj</a></div>
       <h1>
         Cpfcnpj
         
@@ -72,6 +72,9 @@ Caso seja invalido retorna nil</p>
 <tr>
   <td class="summary_signature"><a href="#valid?/1">valid?(number_in)</a></td>
   
+    <td class="summary_synopsis"><p>Valida cpf/cnpj caracteres especias nao sao levados em consideracao</p>
+</td>
+  
 </tr>
 
         </table>
@@ -113,7 +116,11 @@ Caso seja invalido retorna nil</p>
   </div>
   
   <section class="docstring">
-    
+    <p>Valida cpf/cnpj caracteres especias nao sao levados em consideracao</p>
+<h2>Exemplos</h2>
+<pre><code class="iex elixir">iex&gt;Cpfcnpj.valid?({:cnpj,&quot;69.103.604/0001-60&quot;})
+true</code></pre>
+
   </section>
   
 </section>

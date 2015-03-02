@@ -22,7 +22,16 @@ defmodule Cpfcnpj do
     @cnpj_algs_1 [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2,0,0]
     @cnpj_algs_2 [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2,0]
 	@cnpj_regex ~r/(\d{2})?(\d{3})?(\d{3})?(\d{4})?(\d{2})/
+
+    @doc ~S"""
+    Valida cpf/cnpj caracteres especias nao sao levados em consideracao
+
+    ## Exemplos
 	
+        iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
+        true
+
+    """	
 	def valid?(number_in) do
 		if check_number(number_in) != :error, do: type_checker(number_in), else: false
 	end
