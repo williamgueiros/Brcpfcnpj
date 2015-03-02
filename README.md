@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/williamgueiros/Brcpfcnpj.svg?branch=master)](https://travis-ci.org/williamgueiros/Brcpfcnpj)
+
 #Brcpfcnpj
 =========
 
