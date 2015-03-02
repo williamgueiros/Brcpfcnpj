@@ -1,5 +1,5 @@
 defmodule Cpfcnpj do
-	@doc ~S"""
+	@moduledoc ~S"""
 	Modulo responsavel pro realizar todos os calculos de validacao
 	
 	exemplos:
