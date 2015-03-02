@@ -10,6 +10,10 @@ before_script:
   - MIX_ENV=test mix deps.get
 script:
   - MIX_ENV=test mix test
+after_script:
+  - mix deps.get --only docs
+  - MIX_ENV=docs mix deps.get
+  - MIX_ENV=docs mix inch.report
 notifications:
   recipients:
     - williammelo@gmail.com
