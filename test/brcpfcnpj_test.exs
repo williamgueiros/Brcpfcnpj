@@ -15,7 +15,7 @@ defmodule BrcpfcnpjTest do
 	end
 
 	test "should return the formated to wrong cnpj" do
-    assert Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000161"}) ==nil
+		assert Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000161"}) ==nil
 	end
 
 	test "should generate a valid cpf" do
