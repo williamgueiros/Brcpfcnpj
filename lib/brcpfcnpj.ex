@@ -82,35 +82,23 @@ defmodule Brcpfcnpj do
 	end
 
 
-	@doc ~S"""
-		Valida o Cnpj e retorna uma String do Cnpj formatado
-		Caso seja invalido retorna nil
-
-		Exemplos
-
-				iex>Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000160"})
-				"69.103.604/0001-60"
-				iex> Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000161"})
-				nil
+	@doc """
+	Gera um Cpf válido, foratado ou não
 	"""
 
-	def cpf_generate do
-		Cpfcnpj.generate(%Cpf{}.tp_data)
+	def cpf_generate (format \\ false) do
+		tp_data = %Cpf{}.tp_data
+		cpf = Cpfcnpj.generate(tp_data)
+		if format, do: Cpfcnpj.format_number({ tp_data, cpf }), else: cpf
 	end
 
-	@doc ~S"""
-		Valida o Cnpj e retorna uma String do Cnpj formatado
-		Caso seja invalido retorna nil
-
-		Exemplos
-
-				iex>Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000160"})
-				"69.103.604/0001-60"
-				iex> Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000161"})
-				nil
+	@doc """
+	Gera um Cnpj válido, foratado ou não
 	"""
 
-	def cnpj_generate do
-		Cpfcnpj.generate(%Cnpj{}.tp_data)
+	def cnpj_generate (format \\ false) do
+		tp_data = %Cnpj{}.tp_data
+		cnpj = Cpfcnpj.generate(tp_data)
+		if format, do: Cpfcnpj.format_number({ tp_data, cnpj }), else: cnpj
 	end
 end

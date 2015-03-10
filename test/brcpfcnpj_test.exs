@@ -25,4 +25,12 @@ defmodule BrcpfcnpjTest do
 	test "should generate a valid cnpj" do
 		assert Brcpfcnpj.cnpj_valid?(%Cnpj{ number: Brcpfcnpj.cnpj_generate })
 	end
+
+	test "should generate a formatted cpf" do
+		assert Regex.match?(~r/(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})/, Brcpfcnpj.cpf_generate(true))
+	end
+
+	test "should generate a formatted cnpj" do
+		assert Regex.match?(~r/(\d{2})[.]?(\d{3})[.]?(\d{3})[\/]?(\d{4})[-]?(\d{2})/, Brcpfcnpj.cnpj_generate(true))
+	end
 end
