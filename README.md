@@ -58,7 +58,7 @@ Brcpfcnpj.cnpj_format(cnpj) # ==> nil
 
 ##Gerador de Cpf e Cnpj
 
-Gerando o cpf e cnpj formatado
+Gerando o Cpf e Cnpj com formatação
 
 ```Elixir
 Brcpfcnpj.cpf_generate true
@@ -68,7 +68,7 @@ Brcpfcnpj.cnpj_generate true
 "45.044.251/6215-69"
 ````
 
-Gerando cpf e Cnpj sem formatação
+Gerando Cpf e Cnpj sem formatação
 
 ```Elixir
 Brcpfcnpj.cpf_generate
