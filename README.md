@@ -3,9 +3,7 @@
 
 #Brcpfcnpj
 
-** Valida Cpf/Cnpj e Formatar em String caso necessario **
-
-link para ([documentação](http://hexdocs.pm/brcpfcnpj/)).
+Link para [documentação](http://hexdocs.pm/brcpfcnpj/).
 
 
 ##Validar Cpf/Cnpj
@@ -70,7 +68,7 @@ Brcpfcnpj.cnpj_generate true
 "45.044.251/6215-69"
 ````
 
-Gerando Cpf e Cnpj sem formatação
+Gerando o Cpf e Cnpj sem formatação
 
 ```Elixir
 Brcpfcnpj.cpf_generate
