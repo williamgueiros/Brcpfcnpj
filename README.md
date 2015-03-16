@@ -2,9 +2,11 @@
 [![Inline docs](http://inch-ci.org/github/williamgueiros/Brcpfcnpj.svg?branch=master)](http://inch-ci.org/github/williamgueiros/Brcpfcnpj)
 
 #Brcpfcnpj
-=========
 
 ** Valida Cpf/Cnpj e Formatar em String caso necessario **
+
+link para ([documentação](http://hexdocs.pm/brcpfcnpj/)).
+
 
 ##Validar Cpf/Cnpj
 
