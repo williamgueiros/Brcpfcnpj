@@ -27,10 +27,26 @@ defmodule BrcpfcnpjTest do
 	end
 
 	test "should generate a formatted cpf" do
-		assert Regex.match?(~r/(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})/, Brcpfcnpj.cpf_generate(true))
+		cpf = Brcpfcnpj.cpf_generate true
+		assert Regex.match?(~r/(\d{3})[.]?(\d{3})[.]?(\d{3})[-]?(\d{2})/, cpf)
+		assert %Cpf{number: cpf} |> Brcpfcnpj.cpf_valid?
 	end
 
 	test "should generate a formatted cnpj" do
-		assert Regex.match?(~r/(\d{2})[.]?(\d{3})[.]?(\d{3})[\/]?(\d{4})[-]?(\d{2})/, Brcpfcnpj.cnpj_generate(true))
+		cnpj = Brcpfcnpj.cnpj_generate true
+		assert Regex.match?(~r/(\d{2})[.]?(\d{3})[.]?(\d{3})[\/]?(\d{4})[-]?(\d{2})/, cnpj)
+		assert %Cnpj{number: cnpj} |> Brcpfcnpj.cnpj_valid?
+	end
+	
+	test "should generate a cpf" do
+		cpf = Brcpfcnpj.cpf_generate
+		assert cpf |> String.length == 11
+		assert %Cpf{number: cpf} |> Brcpfcnpj.cpf_valid?
+	end
+
+	test "should generate a cnpj" do
+		cnpj = Brcpfcnpj.cnpj_generate
+		assert cnpj |> String.length == 14
+		assert %Cnpj{number: cnpj} |> Brcpfcnpj.cnpj_valid?
 	end
 end

@@ -83,7 +83,8 @@ defmodule Brcpfcnpj do
 
 
 	@doc """
-	Gera um Cpf válido, foratado ou não
+	Responsavel por gerar um Cpf válido, formatado ou não
+	Caso seja passado o parametro true recebeca o mesmo formatado
 	"""
 
 	def cpf_generate (format \\ false) do
@@ -93,7 +94,8 @@ defmodule Brcpfcnpj do
 	end
 
 	@doc """
-	Gera um Cnpj válido, foratado ou não
+	Responsavel por gerar um Cnpj válido, formatado ou não
+	Caso seja passado o parametro true recebeca o mesmo formatado
 	"""
 
 	def cnpj_generate (format \\ false) do

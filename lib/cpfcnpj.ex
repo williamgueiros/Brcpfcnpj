@@ -108,7 +108,10 @@ defmodule Cpfcnpj do
 			nil
 		end
 	end
-
+	
+    @doc ~S"""
+    Gerador de cpf/cnpj concatenado com o digito verificador	
+    """
 	def generate(tp_cpfcnpj) do
 		numbers = random_numbers(tp_cpfcnpj)
 		first_valid_char = character_valid(numbers, { tp_cpfcnpj, :first })
@@ -120,6 +123,6 @@ defmodule Cpfcnpj do
 	defp random_numbers (tp_cpfcnpj) do
 		Stream.repeatedly(fn -> round :random.uniform * 9 end)
 		|> Enum.take((if tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
-		|> Enum.reduce("", fn num, acc -> Integer.to_string(num) <> acc end);
+		|> Enum.reduce("", &(Integer.to_string(&1)<>&2));
 	end
 end

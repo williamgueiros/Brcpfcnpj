@@ -56,7 +56,35 @@ cnpj = %Cnpj{number: "69103604000161"}
 Brcpfcnpj.cnpj_format(cnpj) # ==> nil
 ````
 
+##Gerador de Cpf e Cnpj
+
+Gerando o cpf e cnpj formatado
+
+```Elixir
+Brcpfcnpj.cpf_generate true
+"468.535.974-78"
+
+Brcpfcnpj.cnpj_generate true
+"45.044.251/6215-69"
+````
+
+Gerando cpf e Cnpj sem formatação
+
+```Elixir
+Brcpfcnpj.cpf_generate
+"02239513403"
+
+Brcpfcnpj.cnpj_generate
+"17463578863541"
+````
+
+#### Contribuição
+
+[Diogo Beda]
+
 #### Todo
 
 Pretendo acessentar o suporte ao [ecto](https://github.com/elixir-lang/ecto), para o tipo de dado CPF e CNPJ, assim que possivel.
 Tenho que estudar se e possivel
+
+[Diogo Beda]: https://github.com/diogobeda

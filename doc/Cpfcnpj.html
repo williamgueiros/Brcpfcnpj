@@ -25,7 +25,7 @@
     </script>
 
     <section id="content">
-      <div class="breadcrumbs">brcpfcnpj v0.0.8 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Cpfcnpj.html">Cpfcnpj</a></div>
+      <div class="breadcrumbs">brcpfcnpj v0.0.9 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Cpfcnpj.html">Cpfcnpj</a></div>
       <h1>
         Cpfcnpj
         
@@ -49,7 +49,7 @@
 <p>exemplos:</p>
 <pre><code class="iex elixir">iex&gt;Cpfcnpj.valid?({:cnpj,&quot;69.103.604/0001-60&quot;})
    true
-   iex&gt;Cpfcnpj.valid?({:cpf,&quot;111.444.777-35&quot;})       
+   iex&gt;Cpfcnpj.valid?({:cpf,&quot;111.444.777-35&quot;})
    true</code></pre>
 <p>Com ou sem os caracteres especiais os mesmos serao validados</p>
 
@@ -66,6 +66,13 @@
   
     <td class="summary_synopsis"><p>Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
 Caso seja invalido retorna nil</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#generate/1">generate(tp_cpfcnpj)</a></td>
+  
+    <td class="summary_synopsis"><p>Gerador de cpf/cnpj concatenado com o digito verificador</p>
 </td>
   
 </tr>
@@ -101,6 +108,22 @@ Caso seja invalido retorna nil</p>
 <h2>Exemplos</h2>
 <pre><code class="iex elixir">iex&gt; Cpfcnpj.format_number({:cnpj,&quot;69.103.604/0001-60&quot;})
 &quot;69.103.604/0001-60&quot;</code></pre>
+
+  </section>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="generate/1">
+    <span class="signature"><strong>generate(tp_cpfcnpj)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#generate/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    <p>Gerador de cpf/cnpj concatenado com o digito verificador    </p>
 
   </section>
   
