@@ -63,8 +63,10 @@ defmodule Cpfcnpj do
 	end
 
   defp mult_sum(algs, cpfcnpj) do
-		mult = cpfcnpj |> String.codepoints |> Enum.with_index
-		|> Enum.map fn {k, v} -> String.to_integer(k) * Enum.at(algs,v) end
+		mult = cpfcnpj
+		|> String.codepoints
+		|> Enum.with_index
+		|> Enum.map(fn {k, v} -> String.to_integer(k) * Enum.at(algs,v) end)
 		Enum.reduce(mult, 0, &+/2)
   end
 
@@ -73,11 +75,11 @@ defmodule Cpfcnpj do
   end
 
   defp character_valid(cpfcnpj,valid_type) do
-		case valid_type do
-			{:cpf,:first} -> array=@cpf_algs_1
-			{:cnpj,:first} -> array=@cnpj_algs_1
-			{:cpf,:second} -> array=@cpf_algs_2
-			{:cnpj,:second} -> array=@cnpj_algs_2
+		array = case valid_type do
+			{:cpf,:first} -> @cpf_algs_1
+			{:cnpj,:first} -> @cnpj_algs_1
+			{:cpf,:second} -> @cpf_algs_2
+			{:cnpj,:second} -> @cnpj_algs_2
 		end
 
 		mult_sum(array, cpfcnpj)
@@ -108,9 +110,9 @@ defmodule Cpfcnpj do
 			nil
 		end
 	end
-	
+
     @doc ~S"""
-    Gerador de cpf/cnpj concatenado com o digito verificador	
+    Gerador de cpf/cnpj concatenado com o digito verificador
     """
 	def generate(tp_cpfcnpj) do
 		numbers = random_numbers(tp_cpfcnpj)
