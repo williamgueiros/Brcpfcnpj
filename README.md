@@ -8,7 +8,7 @@ Link para [documentação](http://hexdocs.pm/brcpfcnpj/).
 
 ##Validar Cpf/Cnpj
 
-Foi inspirado na Gem * [brcpfcnpj](https://github.com/tapajos/brazilian-rails/tree/master/brcpfcnpj) 
+Foi inspirado na Gem * [brcpfcnpj](https://github.com/tapajos/brazilian-rails/tree/master/brcpfcnpj)
 
 Recebem strings representando números de cpf/cnpj e verificam a validade destes números usando dois critérios:
 
@@ -22,7 +22,7 @@ Brcpfcnpj.cpf_valid?(cpf) # ==> true
 
 cpf = %Cpf{number: "111.444.777-35"}
 Brcpfcnpj.cpf_valid?(cpf) # ==> true
- 
+
 ````
 ### Validando numero de cnpj
 ```Elixir
@@ -35,7 +35,7 @@ Brcpfcnpj.cnpj_valid?(cnpj)# ==> true
 
 ##Formatando a String
 Existe a possibilidade de alem de validar, ter o retorno da String formatada.
-Caso a mesmas seja valida terá o retorno da String em seu divido formato 69.103.604/0001-60.
+Caso a mesma seja valida terá o retorno da String em seu devido formato 69.103.604/0001-60.
 caso contratio tera de retorno nil.
 
 
@@ -45,7 +45,7 @@ Brcpfcnpj.cpf_format(cpf)  # ==>"111.444.777-35"
 
 cpf = %Cpf{number: "11144477734"}
 Brcpfcnpj.cpf_format(cpf)  # ==> nil
- 
+
 ````
 
 ```Elixir
