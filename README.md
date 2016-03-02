@@ -78,6 +78,26 @@ Brcpfcnpj.cnpj_generate
 "17463578863541"
 ````
 
+## Utilizando em conjunto com o Ecto
+O modulo ```Brcpfcnpj.Changeset``` contém algumas funções que podem
+ser utilizadas em conjunto com a API de changesets do Ecto.
+```elixir
+import Brcpfcnpj.Changeset
+
+def changeset(model, params \\ :empty) do
+    model
+    |> cast(params, @required_fields, @optional_fields)
+    |> validate_cnpj(:cnpj)
+    |> validate_cpf(:cpf)
+end
+```
+
+Por padrão esses validadores adicionam a mensagem "Invalid Cnpj/Cpf" a lista de erros.
+Essa mensagem pode ser configurada com o parâmetro "message".
+```elixir
+validate_cnpj(:cnpj, message: "Cnpj Inválido")
+```
+
 #### Contribuição
 [Diogo Beda](https://github.com/diogobeda), [Tiago Henrique Engel](https://github.com/tiagoengel)
 
