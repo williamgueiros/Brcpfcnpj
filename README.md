@@ -79,14 +79,10 @@ Brcpfcnpj.cnpj_generate
 ````
 
 #### Contribuição
-
-[Diogo Beda]
-[Tiago Henrique Engel]
+[Diogo Beda](https://github.com/diogobeda), [Tiago Henrique Engel](https://github.com/tiagoengel)
 
 #### Todo
 
 Pretendo acessentar o suporte ao [ecto](https://github.com/elixir-lang/ecto), para o tipo de dado CPF e CNPJ, assim que possivel.
 Tenho que estudar se e possivel
 
-[Diogo Beda]: https://github.com/diogobeda
-[Tiago Henrique Engel]: https://github.com/tiagoengel
