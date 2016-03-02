@@ -81,6 +81,7 @@ Brcpfcnpj.cnpj_generate
 #### Contribuição
 
 [Diogo Beda]
+[tiagoengel]
 
 #### Todo
 
@@ -88,3 +89,4 @@ Pretendo acessentar o suporte ao [ecto](https://github.com/elixir-lang/ecto), pa
 Tenho que estudar se e possivel
 
 [Diogo Beda]: https://github.com/diogobeda
+[tiagoengel]: https://github.com/tiagoengel
