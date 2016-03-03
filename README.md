@@ -98,6 +98,8 @@ Essa mensagem pode ser configurada com o parâmetro "message".
 validate_cnpj(:cnpj, message: "Cnpj Inválido")
 ```
 
+Em caso de duvida de uso recomendo está leitura [mais](https://github.com/williamgueiros/Brcpfcnpj/issues/3#issuecomment-191368591)
+
 #### Contribuição
 [Diogo Beda](https://github.com/diogobeda), [Tiago Henrique Engel](https://github.com/tiagoengel)
 
