@@ -123,7 +123,8 @@ defmodule Cpfcnpj do
 	end
 
 	defp random_numbers (tp_cpfcnpj) do
-		Stream.repeatedly(fn -> round :random.uniform * 9 end)
+		numbersList = Enum.to_list(0..9)
+		Stream.repeatedly(fn -> round numbersList |> Enum.random end)
 		|> Enum.take((if tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
 		|> Enum.reduce("", &(Integer.to_string(&1)<>&2));
 	end
