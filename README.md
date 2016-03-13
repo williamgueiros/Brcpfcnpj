@@ -4,6 +4,7 @@
 #Brcpfcnpj
 
 Link para [documentação](http://hexdocs.pm/brcpfcnpj/).
+Caso utilize elixir < 1.2 utilize a versão 0.0.11, [maiores informacoes](https://github.com/williamgueiros/Brcpfcnpj/issues/5)  
 
 
 ##Validar Cpf/Cnpj
