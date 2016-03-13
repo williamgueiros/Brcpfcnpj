@@ -1,19 +1,13 @@
-language: erlang
+language: elixir
+elixir:
+  - 1.2.2
 otp_release:
-  - 17.3
-before_install:
-  - wget http://s3.hex.pm/builds/elixir/v1.0.2.zip
-  - unzip -d elixir v1.0.2.zip
+  - 18.2.1
 before_script:
-  - export PATH=`pwd`/elixir/bin:$PATH
   - mix local.hex --force
-  - MIX_ENV=test mix deps.get
+  - mix deps.get
 script:
-  - MIX_ENV=test mix test
-after_script:
-  - mix deps.get --only docs
-  - MIX_ENV=docs mix deps.get
-  - MIX_ENV=docs mix inch.report
+  - mix test
 notifications:
   recipients:
     - williammelo@gmail.com
