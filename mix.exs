@@ -17,22 +17,22 @@ defmodule Brcpfcnpj.Mixfile do
   defp deps do
     [{:earmark, "~> 0.2.1", only: :dev},
      {:ex_doc, "~> 0.11.4", only: :dev},
-	 {:inch_ex, "~> 0.5.1", only: :docs}]
+     {:inch_ex, "~> 0.5.1", only: :docs}]
   end
-  
+
   defp description do
       """
-      Valida Cpf/Cnpj e Formatar em String caso necessario
-	  
-	  Number format and Validate, to the documents brazilians (CPF/CNPJ)
+      Coleção de funções para validação e formatação de CPF e CNPJ.
+
+      Validation and format for brazilian id documents (CPF/CNPJ).
       """
     end
-	
+
   defp package do
      [files: ~w(lib test config mix.exs README*),
-	 maintainers: ["William Gueiros"],
-	 licenses: ["Unlicense"],
-	 links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"}]
-  end	
+   maintainers: ["William Gueiros"],
+   licenses: ["Unlicense"],
+   links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"}]
+  end
 
 end
