@@ -3,11 +3,11 @@ defmodule Brcpfcnpj.Mixfile do
 
   def project do
     [app: :brcpfcnpj,
-     version: "0.1.0",
+     version: "0.1.1",
      elixir: "~> 1.2",
-     description: description,
-     package: package,
-     deps: deps]
+     description: description(),
+     package: package(),
+     deps: deps()]
   end
 
   def application do
