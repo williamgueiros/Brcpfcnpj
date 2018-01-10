@@ -4,6 +4,8 @@ defmodule Brcpfcnpj.Changeset do
   Ecto.
   """
 
+  import Ecto.Changeset, only: [validate_change: 3]
+
   @type t :: %{valid?: boolean(),
                changes: %{atom => term},
                errors: [error]}
@@ -26,10 +28,11 @@ defmodule Brcpfcnpj.Changeset do
   """
   @spec validate_cnpj(t, atom, Keyword.t) :: t
   def validate_cnpj(changeset, field, opts \\ []) when is_atom(field) do
-    validate changeset, field, fn value ->
-      cond do
-        Brcpfcnpj.cnpj_valid?(%Cnpj{number: value}) -> []
-        true -> [{field, message(opts, "Invalid Cnpj")}]
+    validate_change changeset, field, fn _, value ->
+      if Brcpfcnpj.cnpj_valid?(%Cnpj{number: value}) do
+        []
+      else
+        [{field, message(opts, "Invalid Cnpj")}]
       end
     end
   end
@@ -48,23 +51,12 @@ defmodule Brcpfcnpj.Changeset do
   """
   @spec validate_cpf(t, atom, Keyword.t) :: t
   def validate_cpf(changeset, field, opts \\ []) when is_atom(field) do
-    validate changeset, field, fn value ->
-      cond do
-        Brcpfcnpj.cpf_valid?(%Cpf{number: value}) -> []
-        true -> [{field, message(opts, "Invalid Cpf")}]
+    validate_change changeset, field, fn _, value ->
+      if Brcpfcnpj.cpf_valid?(%Cpf{number: value}) do
+        []
+      else
+        [{field, message(opts, "Invalid Cpf")}]
       end
-    end
-  end
-
-  defp validate(changeset, field, validator) do
-    %{changes: changes, errors: errors} = changeset
-
-    value = Map.get(changes, field)
-    new  = if is_nil(value), do: [], else: validator.(value)
-
-    case new do
-      []    -> changeset
-      [_|_] -> %{changeset | errors: new ++ errors, valid?: false}
     end
   end
 

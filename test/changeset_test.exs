@@ -14,7 +14,7 @@ defmodule ChangesetTest do
 		changeset = cast(%{cnpj: "1234"}) |> validate_cnpj(:cnpj)
     refute changeset.valid?
     %{errors: errors} = changeset
-    assert errors[:cnpj] == "Invalid Cnpj"
+    assert errors[:cnpj] == {"Invalid Cnpj", []}
 	end
 
 	test "changeset with valid cnpj" do
@@ -26,7 +26,7 @@ defmodule ChangesetTest do
 		changeset = cast(%{cpf: "1234"}) |> validate_cpf(:cpf)
     refute changeset.valid?
     %{errors: errors} = changeset
-    assert errors[:cpf] == "Invalid Cpf"
+    assert errors[:cpf] == {"Invalid Cpf", []}
 	end
 
 	test "changeset with valid cpf" do
@@ -34,14 +34,14 @@ defmodule ChangesetTest do
     assert changeset.valid?
 	end
 
-	test "custon error message" do
+	test "custom error message" do
 		changeset = cast(%{cnpj: "1234", cpf: "123"})
 			|> validate_cnpj(:cnpj, message: "Cnpj Inválido")
 			|> validate_cpf(:cpf, message: "Cpf Inválido")
 
 		%{errors: errors} = changeset
-		assert errors[:cnpj] == "Cnpj Inválido"
-		assert errors[:cpf] == "Cpf Inválido"
+		assert errors[:cnpj] == {"Cnpj Inválido", []}
+		assert errors[:cpf] == {"Cpf Inválido", []}
 	end
 
 end
