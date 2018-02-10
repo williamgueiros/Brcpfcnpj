@@ -32,5 +32,9 @@ defmodule CpfTest do
 		 	assert Brcpfcnpj.cpf_valid?(%Cpf{number: cpf}) ==false
 		end
 		)
+		end
+		
+		test "should be invalid with nil input" do
+		 	assert Brcpfcnpj.cpf_valid?(%Cpf{number: nil}) == false
     end
 end
