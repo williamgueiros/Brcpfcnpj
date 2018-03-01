@@ -36,6 +36,10 @@ defmodule Cpfcnpj do
 		if check_number(number_in) != :error, do: type_checker(number_in), else: false
 	end
 
+	defp check_number({_, nil}) do
+		:error
+	end
+
   defp check_number(tp_cpfcnpj) do
 		cpfcnpj=String.replace(elem(tp_cpfcnpj,1), ~r/[\.\/-]/, "")
 
