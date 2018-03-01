@@ -24,4 +24,8 @@ defmodule CnpjTest do
 		end
 		)
 	end
+
+	test "should be invalid with nil input" do
+		assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: nil}) == false
+	end
 end
