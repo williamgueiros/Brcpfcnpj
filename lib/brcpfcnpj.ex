@@ -4,7 +4,7 @@ defmodule Brcpfcnpj do
 	1. O formato da string, que deve seguir o padrão xx.xxx.xxx/xxxx-xx, onde 'x' pode ser qualquer dígito de 0 a 9 e os traços (-), barra (/) e pontos (.) *são opcionais*.
 	2. O conteúdo numérico desta string, que é validado através do cálculo do 'módulo 11' dos dígitos que compõem a string.
 
-    exemplos:
+    ## Exemplos:
 
         iex>Brcpfcnpj.cpf_valid?(%Cpf{number: "111.444.777-35"})
         true
@@ -18,12 +18,14 @@ defmodule Brcpfcnpj do
     Valida Cpf, realiza a chamda ao modulo Cpfcnpj com a estrutura correta.
 	forca o desenvolvedor passar os parametros de forma correta
 
-    exemplos:
+    ## Exemplos:
 
         iex>Brcpfcnpj.cpf_valid?(%Cpf{number: "11144477735"})
         true
         iex>Brcpfcnpj.cpf_valid?(%Cpf{number: "111.444.777-35"})
         true
+        iex>Brcpfcnpj.cpf_valid?(%Cpf{number: "1127772-35"})
+        false
 
 	Com ou sem os caracteres especiais os mesmos serao validados
     """
@@ -36,12 +38,14 @@ defmodule Brcpfcnpj do
     Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com a estrutura correta.
 	forca o desenvolvedor passar os parametros de forma correta
 
-    Exemplos
+    ## Exemplos
 
         iex>Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69103604000160"})
         true
         iex>Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69.103.604/0001-60"})
         true
+        iex>Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69./0001-60"})
+        false
 
     """
 
@@ -53,12 +57,13 @@ defmodule Brcpfcnpj do
     Valida o Cpf e retorna uma String do Cpf formatado
 	Caso seja invalido retorna nil
 
-    Exemplos
+    ## Exemplos
 
         iex>Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"})
         "111.444.777-35"
         iex>Brcpfcnpj.cpf_format(%Cpf{number: "11144477734"})
         nil
+
     """
 
 	def cpf_format(cpf=%Cpf{}) do
@@ -69,12 +74,13 @@ defmodule Brcpfcnpj do
     Valida o Cnpj e retorna uma String do Cnpj formatado
 	Caso seja invalido retorna nil
 
-    Exemplos
+    ## Exemplos
 
         iex>Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000160"})
         "69.103.604/0001-60"
         iex> Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000161"})
         nil
+
     """
 
 	def cnpj_format(cnpj=%Cnpj{}) do
@@ -84,7 +90,8 @@ defmodule Brcpfcnpj do
 
 	@doc """
 	Responsavel por gerar um Cpf válido, formatado ou não
-	Caso seja passado o parametro true recebeca o mesmo formatado
+    Caso seja passado o parametro true recebeca o mesmo formatado
+        
 	"""
 
 	def cpf_generate (format \\ false) do
