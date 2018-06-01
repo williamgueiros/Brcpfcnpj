@@ -18,8 +18,8 @@ defmodule Brcpfcnpj.Mixfile do
 
   defp deps do
     [
-      {:earmark, "~> 0.2.1", only: :dev},
-      {:ex_doc, "~> 0.11.4", only: :dev},
+      {:earmark, "~> 1.2", only: :dev},
+      {:ex_doc, "~> 0.18", only: :dev},
       {:inch_ex, "~> 0.5.1", only: :docs}
     ]
   end
