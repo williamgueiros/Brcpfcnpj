@@ -11,6 +11,7 @@ defmodule Cpfcnpj do
 
   Com ou sem os caracteres especiais os mesmos serao validados
   """
+
   @division 11
 
   @cpf_length 11
@@ -32,6 +33,7 @@ defmodule Cpfcnpj do
       true
 
   """
+  @spec valid?({:cpf | :cnpj, String.t()}) :: String.t() | false
   def valid?(number_in) do
     if check_number(number_in) != :error, do: type_checker(number_in), else: false
   end
@@ -106,6 +108,7 @@ defmodule Cpfcnpj do
       "69.103.604/0001-60"
 
   """
+  @spec format_number({:cpf | :cnpj, String.t()}) :: String.t() | nil
   def format_number(number_in) do
     if valid?(number_in) do
       tp_cpfcnpj = {elem(number_in, 0), String.replace(elem(number_in, 1), ~r/[^0-9]/, "")}
@@ -124,7 +127,9 @@ defmodule Cpfcnpj do
 
   @doc ~S"""
   Gerador de cpf/cnpj concatenado com o digito verificador
+
   """
+  @spec generate(:cpf | :cnpj) :: String.t()
   def generate(tp_cpfcnpj) do
     numbers = random_numbers(tp_cpfcnpj)
     first_valid_char = character_valid(numbers, {tp_cpfcnpj, :first})
