@@ -9,9 +9,16 @@ defmodule Cpfcnpj do
         iex>Cpfcnpj.valid?({:cpf,"111.444.777-35"})
         true
 
+<<<<<<< HEAD
 	Com ou sem os caracteres especiais os mesmos serao validados
 	"""
 	@division 11
+=======
+  Com ou sem os caracteres especiais os mesmos serao validados
+  """
+
+  @division 11
+>>>>>>> 2ae2a8e... Adicionar @spec em Cpfcnpj
 
 	@cpf_length 11
     @cpf_algs_1 [10, 9, 8, 7, 6, 5, 4, 3, 2,0,0]
@@ -31,10 +38,11 @@ defmodule Cpfcnpj do
         iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
         true
 
-    """
-	def valid?(number_in) do
-		if check_number(number_in) != :error, do: type_checker(number_in), else: false
-	end
+  """
+  @spec valid?({:cpf | :cnpj, String.t()}) :: String.t() | false
+  def valid?(number_in) do
+    if check_number(number_in) != :error, do: type_checker(number_in), else: false
+  end
 
 	defp check_number({_, nil}) do
 		:error
@@ -78,58 +86,50 @@ defmodule Cpfcnpj do
 		if remainder < 2, do: 0, else: @division - remainder
   end
 
-  defp character_valid(cpfcnpj,valid_type) do
-		array = case valid_type do
-			{:cpf,:first} -> @cpf_algs_1
-			{:cnpj,:first} -> @cnpj_algs_1
-			{:cpf,:second} -> @cpf_algs_2
-			{:cnpj,:second} -> @cnpj_algs_2
-		end
+  @doc ~S"""
+  Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
+  Caso seja invalido retorna nil
 
-		mult_sum(array, cpfcnpj)
-		|> rem(@division)
-		|> character_calc
-		|> Integer.to_string
+  ## Exemplos
+      iex> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
+      "69.103.604/0001-60"
+
+  """
+  @spec format_number({:cpf | :cnpj, String.t()}) :: String.t() | nil
+  def format_number(number_in) do
+    if valid?(number_in) do
+      tp_cpfcnpj = {elem(number_in, 0), String.replace(elem(number_in, 1), ~r/[^0-9]/, "")}
+
+      case tp_cpfcnpj do
+        {:cpf, cpf} ->
+          Regex.replace(@cpf_regex, cpf, "\\1.\\2.\\3-\\4")
+
+        {:cnpj, cnpj} ->
+          Regex.replace(@cnpj_regex, cnpj, "\\1.\\2.\\3/\\4-\\5")
+      end
+    else
+      nil
+    end
   end
 
-    @doc ~S"""
-    Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
-	Caso seja invalido retorna nil
+  @doc ~S"""
+  Gerador de cpf/cnpj concatenado com o digito verificador
 
-    ## Exemplos
-        iex> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
-        "69.103.604/0001-60"
+  """
+  @spec generate(:cpf | :cnpj) :: String.t()
+  def generate(tp_cpfcnpj) do
+    numbers = random_numbers(tp_cpfcnpj)
+    first_valid_char = character_valid(numbers, {tp_cpfcnpj, :first})
+    second_valid_char = character_valid(numbers <> first_valid_char, {tp_cpfcnpj, :second})
 
-    """
-	def format_number(number_in) do
-		if valid?(number_in) do
-			tp_cpfcnpj={elem(number_in,0),String.replace(elem(number_in,1), ~r/[^0-9]/, "")}
-			case tp_cpfcnpj do
-				{:cpf,cpf} ->
-					Regex.replace(@cpf_regex, cpf,"\\1.\\2.\\3-\\4")
-				{:cnpj,cnpj} ->
-					Regex.replace(@cnpj_regex, cnpj,"\\1.\\2.\\3/\\4-\\5")
-			end
-		else
-			nil
-		end
-	end
+    numbers <> first_valid_char <> second_valid_char
+  end
 
-    @doc ~S"""
-    Gerador de cpf/cnpj concatenado com o digito verificador
-    """
-	def generate(tp_cpfcnpj) do
-		numbers = random_numbers(tp_cpfcnpj)
-		first_valid_char = character_valid(numbers, { tp_cpfcnpj, :first })
-		second_valid_char = character_valid(numbers <> first_valid_char, { tp_cpfcnpj, :second })
+  defp random_numbers(tp_cpfcnpj) do
+    numbersList = Enum.to_list(0..9)
 
-		numbers <> first_valid_char <> second_valid_char
-	end
-
-	defp random_numbers (tp_cpfcnpj) do
-		numbersList = Enum.to_list(0..9)
-		Stream.repeatedly(fn -> round numbersList |> Enum.random end)
-		|> Enum.take((if tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
-		|> Enum.reduce("", &(Integer.to_string(&1)<>&2));
-	end
+    Stream.repeatedly(fn -> round(numbersList |> Enum.random()) end)
+    |> Enum.take(if(tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
+    |> Enum.reduce("", &(Integer.to_string(&1) <> &2))
+  end
 end
