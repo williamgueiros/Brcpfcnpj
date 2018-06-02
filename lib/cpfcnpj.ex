@@ -2,7 +2,7 @@ defmodule Cpfcnpj do
 	@moduledoc ~S"""
 	Modulo responsavel pro realizar todos os calculos de validacao
 
-	exemplos:
+	## Exemplos:
 
         iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
         true
@@ -11,6 +11,7 @@ defmodule Cpfcnpj do
 
 	Com ou sem os caracteres especiais os mesmos serao validados
 	"""
+	
 	@division 11
 
 	@cpf_length 11
@@ -30,6 +31,8 @@ defmodule Cpfcnpj do
 
         iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
         true
+        iex>Cpfcnpj.valid?({:cpf,"69.100001-60"})
+        false
 
     """
 	def valid?(number_in) do
@@ -99,6 +102,12 @@ defmodule Cpfcnpj do
     ## Exemplos
         iex> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
         "69.103.604/0001-60"
+        iex> Cpfcnpj.format_number({:cpf,"69.103.604/0001-60"})
+        nil
+        iex> Cpfcnpj.format_number({:cpf,"111.444.77735"})
+        "111.444.777-35"
+        iex> Cpfcnpj.format_number({:cnpj,"111.444.77735"})
+        nil
 
     """
 	def format_number(number_in) do
