@@ -1,5 +1,12 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
 /_build
 /deps
 /doc
 erl_crash.dump
 *.ez
+.idea/
+brcpfcnpj-*.tar
