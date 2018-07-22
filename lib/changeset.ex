@@ -1,7 +1,6 @@
 defmodule Brcpfcnpj.Changeset do
   @moduledoc """
-  Define funções para serem utilizadas em conjunto com a API de changest do
-  Ecto.
+  Define funções para serem utilizadas em conjunto com a API de changeset do Ecto.
   """
 
   @type t :: %{valid?: boolean(), changes: %{atom => term}, errors: [error]}

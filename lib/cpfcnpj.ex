@@ -1,13 +1,13 @@
 defmodule Cpfcnpj do
   @moduledoc ~S"""
-  Modulo responsavel pro realizar todos os calculos de validacao
+  Modulo responsavel pro realizar todos os calculos de validacao.
 
-  exemplos:
+  ## Examples
 
-         iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
-         true
-         iex>Cpfcnpj.valid?({:cpf,"111.444.777-35"})
-         true
+      iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
+      true
+      iex>Cpfcnpj.valid?({:cpf,"111.444.777-35"})
+      true
 
   Com ou sem os caracteres especiais os mesmos serao validados
   """
@@ -24,14 +24,15 @@ defmodule Cpfcnpj do
   @cnpj_regex ~r/(\d{2})?(\d{3})?(\d{3})?(\d{4})?(\d{2})/
 
   @doc ~S"""
-  Valida cpf/cnpj caracteres especias nao sao levados em consideracao
+  Valida cpf/cnpj caracteres especias nao sao levados em consideracao.
 
-  ## Exemplos
+  ## Examples
 
       iex>Cpfcnpj.valid?({:cnpj,"69.103.604/0001-60"})
       true
 
   """
+  @spec valid?({:cpf | :cnpj, String.t()}) :: String.t() | false
   def valid?(number_in) do
     if check_number(number_in) != :error, do: type_checker(number_in), else: false
   end
@@ -98,14 +99,15 @@ defmodule Cpfcnpj do
   end
 
   @doc ~S"""
-  Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado
+  Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado.
   Caso seja invalido retorna nil
 
-  ## Exemplos
+  ## Examples
       iex> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
       "69.103.604/0001-60"
 
   """
+  @spec format_number({:cpf | :cnpj, String.t()}) :: String.t() | nil
   def format_number(number_in) do
     if valid?(number_in) do
       tp_cpfcnpj = {elem(number_in, 0), String.replace(elem(number_in, 1), ~r/[^0-9]/, "")}
@@ -123,8 +125,9 @@ defmodule Cpfcnpj do
   end
 
   @doc ~S"""
-  Gerador de cpf/cnpj concatenado com o digito verificador
+  Gerador de cpf/cnpj concatenado com o digito verificador.
   """
+  @spec generate(:cpf | :cnpj) :: String.t()
   def generate(tp_cpfcnpj) do
     numbers = random_numbers(tp_cpfcnpj)
     first_valid_char = character_valid(numbers, {tp_cpfcnpj, :first})
