@@ -25,7 +25,7 @@ defmodule Brcpfcnpj.Changeset do
     validate(changeset, field, fn value ->
       cond do
         Brcpfcnpj.cnpj_valid?(%Cnpj{number: value}) -> []
-        true -> [{field, message(opts, "Invalid Cnpj")}]
+        true -> [{field, message(opts, {"Invalid Cnpj", validation: :cnpj})}]
       end
     end)
   end
@@ -47,7 +47,7 @@ defmodule Brcpfcnpj.Changeset do
     validate(changeset, field, fn value ->
       cond do
         Brcpfcnpj.cpf_valid?(%Cpf{number: value}) -> []
-        true -> [{field, message(opts, "Invalid Cpf")}]
+        true -> [{field, message(opts, {"Invalid Cpf", validation: :cpf})}]
       end
     end)
   end
@@ -64,6 +64,11 @@ defmodule Brcpfcnpj.Changeset do
     end
   end
 
-  defp message([message: msg], _), do: msg
-  defp message(_, default), do: default
+  defp message(opts, default) do
+    message = Keyword.get(opts, :message, default)
+    format_message(message)
+  end
+
+  defp format_message({_, _} = msg), do: msg
+  defp format_message(msg) when is_binary(msg), do: {msg, []}
 end
