@@ -3,8 +3,11 @@ defmodule Brcpfcnpj.Changeset do
   Define funções para serem utilizadas em conjunto com a API de changeset do Ecto.
   """
 
-  @type t :: %{valid?: boolean(), changes: %{atom => term}, errors: [error]}
-
+  @type t :: %{
+    changes: %{required(atom()) => term()},
+    errors: [{atom(), error()}],
+    valid?: boolean()
+  }
   @type error :: {atom, error_message}
   @type error_message :: String.t() | {String.t(), Keyword.t()}
 
