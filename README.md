@@ -124,6 +124,7 @@ Em caso de duvida [veja mais detalhes](https://github.com/williamgueiros/Brcpfcn
 * [Tiago Henrique Engel](https://github.com/tiagoengel)
 * [Prakash](https://github.com/prem-prakash)
 * [João Thallis](https://github.com/joaothallis)
+* [Esdras](https://github.com/esdras)
 
 ## Agradecimentos
 
