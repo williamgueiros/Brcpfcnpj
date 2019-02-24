@@ -17,6 +17,7 @@ end
 ```
 
 > Para Elixir `< 1.2` utilize a versão `0.0.11`. [Veja detalhes](https://github.com/williamgueiros/Brcpfcnpj/issues/5).
+> Para Ecto `< 2` utilize a versão `0.1.2`. [Veja detalhes](https://github.com/williamgueiros/Brcpfcnpj/pull/17).
 
 ## Validação de CPF/CNPJ
 
