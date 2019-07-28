@@ -34,7 +34,7 @@ defmodule ChangesetTest do
     assert changeset.valid?
   end
 
-  test "custon error message (string only)" do
+  test "custom error message (string only)" do
     changeset =
       cast(%{cnpj: "1234", cpf: "123"})
       |> validate_cnpj(:cnpj, message: "Cnpj Inválido")
@@ -45,7 +45,7 @@ defmodule ChangesetTest do
     assert errors[:cpf] == {"Cpf Inválido", []}
   end
 
-  test "custon error message (addicional info)" do
+  test "custom error message (addicional info)" do
     changeset =
       cast(%{cnpj: "1234", cpf: "123"})
       |> validate_cnpj(:cnpj, message: {"Cnpj Inválido", additional: "info"})
@@ -54,5 +54,43 @@ defmodule ChangesetTest do
     %{errors: errors} = changeset
     assert errors[:cnpj] == {"Cnpj Inválido", [additional: "info"]}
     assert errors[:cpf] == {"Cpf Inválido", [additional: "info"]}
+  end
+
+  test "changeset with list of invalid cnpj fields" do
+    changeset =
+      cast(%{my_cnpj: "12345", other_cnpj: "846864"})
+      |> validate_cnpj([:my_cnpj, :other_cnpj])
+
+    refute changeset.valid?
+    %{errors: errors} = changeset
+    assert errors[:my_cnpj] == {"Invalid Cnpj", validation: :cnpj}
+    assert errors[:other_cnpj] == {"Invalid Cnpj", validation: :cnpj}
+  end
+
+  test "changeset with a list of valid cnpj fields" do
+    changeset =
+      cast(%{my_cnpj: Brcpfcnpj.cnpj_generate(), other_cnpj: Brcpfcnpj.cnpj_generate()})
+      |> validate_cnpj([:my_cnpj, :other_cnpj])
+
+    assert changeset.valid?
+  end
+
+  test "changeset with list of invalid cpf fields" do
+    changeset =
+      cast(%{my_cpf: "12345", other_cpf: "846864"})
+      |> validate_cpf([:my_cpf, :other_cpf])
+
+    refute changeset.valid?
+    %{errors: errors} = changeset
+    assert errors[:my_cpf] == {"Invalid Cpf", validation: :cpf}
+    assert errors[:other_cpf] == {"Invalid Cpf", validation: :cpf}
+  end
+
+  test "changeset with a list of valid cpf fields" do
+    changeset =
+      cast(%{my_cpf: Brcpfcnpj.cpf_generate(), other_cpf: Brcpfcnpj.cpf_generate()})
+      |> validate_cpf([:my_cpf, :other_cpf])
+
+    assert changeset.valid?
   end
 end
