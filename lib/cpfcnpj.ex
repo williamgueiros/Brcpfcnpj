@@ -137,10 +137,11 @@ defmodule Cpfcnpj do
   end
 
   defp random_numbers(tp_cpfcnpj) do
-    numbers_list = Enum.to_list(0..9)
+    random_digit_generator = fn -> Enum.random(0..9) end
 
-    Stream.repeatedly(fn -> round(numbers_list |> Enum.random()) end)
+    random_digit_generator
+    |> Stream.repeatedly()
     |> Enum.take(if(tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
-    |> Enum.reduce("", &(Integer.to_string(&1) <> &2))
+    |> Enum.join()
   end
 end
