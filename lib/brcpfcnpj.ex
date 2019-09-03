@@ -94,7 +94,7 @@ defmodule Brcpfcnpj do
   Responsavel por gerar um Cpf válido, formatado ou não.
   Caso seja passado o parametro true recebera o mesmo formatado
   """
-  @spec cpf_generate(true | false | nil) :: String.t()
+  @spec cpf_generate(boolean() | nil) :: String.t()
   def cpf_generate(format \\ false) do
     tp_data = %Cpf{}.tp_data
     cpf = Cpfcnpj.generate(tp_data)
@@ -105,7 +105,7 @@ defmodule Brcpfcnpj do
   Responsavel por gerar um Cnpj válido, formatado ou não.
   Caso seja passado o parametro true recebera o mesmo formatado
   """
-  @spec cnpj_generate(true | false | nil) :: String.t()
+  @spec cnpj_generate(boolean() | nil) :: String.t()
   def cnpj_generate(format \\ false) do
     tp_data = %Cnpj{}.tp_data
     cnpj = Cpfcnpj.generate(tp_data)
