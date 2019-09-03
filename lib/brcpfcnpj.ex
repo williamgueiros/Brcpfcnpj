@@ -1,5 +1,5 @@
 defmodule Brcpfcnpj do
-  @moduledoc ~S"""
+  @moduledoc """
   Valida Cpf/Cnpj e Formatar em String caso necessario
   1. O formato da string, que deve seguir o padrão xx.xxx.xxx/xxxx-xx,
   onde 'x' pode ser qualquer dígito de 0 a 9 e os traços (-), barra (/)
@@ -17,7 +17,7 @@ defmodule Brcpfcnpj do
   Com ou sem os caracteres especiais os mesmos serao validados
   """
 
-  @doc ~S"""
+  @doc """
   Valida Cpf, realiza a chamada ao modulo Cpfcnpj com a estrutura correta.
   Forca o desenvolvedor passar os parametros de forma correta
 
@@ -37,8 +37,8 @@ defmodule Brcpfcnpj do
     Cpfcnpj.valid?({cpf.tp_data, cpf.number})
   end
 
-  @doc ~S"""
-  Valida Cnpj, realiza a chamda ao modulo Cpfcnpj com a estrutura correta.
+  @doc """
+  Valida Cnpj, realiza a chamada ao modulo Cpfcnpj com a estrutura correta.
   Forca o desenvolvedor passar os parametros de forma correta
 
   ## Examples
@@ -56,7 +56,7 @@ defmodule Brcpfcnpj do
     Cpfcnpj.valid?({cnpj.tp_data, cnpj.number})
   end
 
-  @doc ~S"""
+  @doc """
   Valida o Cpf e retorna uma String do Cpf formatado.
   Caso seja invalido retorna nil
 
@@ -73,7 +73,7 @@ defmodule Brcpfcnpj do
     Cpfcnpj.format_number({cpf.tp_data, cpf.number})
   end
 
-  @doc ~S"""
+  @doc """
   Valida o Cnpj e retorna uma String do Cnpj formatado.
   Caso seja invalido retorna nil
 
