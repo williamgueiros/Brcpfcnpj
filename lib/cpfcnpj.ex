@@ -1,5 +1,5 @@
 defmodule Cpfcnpj do
-  @moduledoc ~S"""
+  @moduledoc """
   Modulo responsavel pro realizar todos os calculos de validacao.
 
   ## Examples
@@ -23,7 +23,7 @@ defmodule Cpfcnpj do
   @cnpj_algs_2 [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0]
   @cnpj_regex ~r/(\d{2})?(\d{3})?(\d{3})?(\d{4})?(\d{2})/
 
-  @doc ~S"""
+  @doc """
   Valida cpf/cnpj caracteres especias nao sao levados em consideracao.
 
   ## Examples
@@ -98,7 +98,7 @@ defmodule Cpfcnpj do
     |> Integer.to_string()
   end
 
-  @doc ~S"""
+  @doc """
   Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado.
   Caso seja invalido retorna nil
 
@@ -124,7 +124,7 @@ defmodule Cpfcnpj do
     end
   end
 
-  @doc ~S"""
+  @doc """
   Gerador de cpf/cnpj concatenado com o digito verificador.
   """
   @spec generate(:cpf | :cnpj) :: String.t()
@@ -137,10 +137,11 @@ defmodule Cpfcnpj do
   end
 
   defp random_numbers(tp_cpfcnpj) do
-    numbersList = Enum.to_list(0..9)
+    random_digit_generator = fn -> Enum.random(0..9) end
 
-    Stream.repeatedly(fn -> round(numbersList |> Enum.random()) end)
+    random_digit_generator
+    |> Stream.repeatedly()
     |> Enum.take(if(tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
-    |> Enum.reduce("", &(Integer.to_string(&1) <> &2))
+    |> Enum.join()
   end
 end

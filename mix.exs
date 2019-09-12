@@ -20,7 +20,9 @@ defmodule Brcpfcnpj.Mixfile do
     [
       {:earmark, "~> 1.2", only: :dev, runtime: false},
       {:ex_doc, "~> 0.18.0", only: :dev, runtime: false},
-      {:inch_ex, "~> 0.5.6", only: :docs, runtime: false}
+      {:inch_ex, "~> 0.5.6", only: :docs, runtime: false},
+      {:credo, "~> 1.1", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false}
     ]
   end
 

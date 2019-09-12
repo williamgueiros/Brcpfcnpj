@@ -30,9 +30,10 @@ defmodule Brcpfcnpj.Changeset do
 
   def validate_cnpj(changeset, field, opts) when is_atom(field) do
     validate(changeset, field, fn value ->
-      cond do
-        Brcpfcnpj.cnpj_valid?(%Cnpj{number: value}) -> []
-        true -> [{field, message(opts, {"Invalid Cnpj", validation: :cnpj})}]
+      if Brcpfcnpj.cnpj_valid?(%Cnpj{number: value}) do
+        []
+      else
+        [{field, message(opts, {"Invalid Cnpj", validation: :cnpj})}]
       end
     end)
   end
@@ -62,9 +63,10 @@ defmodule Brcpfcnpj.Changeset do
 
   def validate_cpf(changeset, field, opts) when is_atom(field) do
     validate(changeset, field, fn value ->
-      cond do
-        Brcpfcnpj.cpf_valid?(%Cpf{number: value}) -> []
-        true -> [{field, message(opts, {"Invalid Cpf", validation: :cpf})}]
+      if Brcpfcnpj.cpf_valid?(%Cpf{number: value}) do
+         []
+      else
+        [{field, message(opts, {"Invalid Cpf", validation: :cpf})}]
       end
     end)
   end
@@ -92,6 +94,6 @@ defmodule Brcpfcnpj.Changeset do
     format_message(message)
   end
 
-  defp format_message({_, _} = msg), do: msg
+  defp format_message(msg = {_, _}), do: msg
   defp format_message(msg) when is_binary(msg), do: {msg, []}
 end
