@@ -42,7 +42,7 @@ defmodule Cpfcnpj do
   end
 
   defp check_number(tp_cpfcnpj) do
-    cpfcnpj = tp_cpfcnpj |> elem(1) |> digits_only()
+    cpfcnpj = tp_cpfcnpj |> elem(1) |> extract_digits()
 
     all_equal? =
       cpfcnpj
@@ -131,8 +131,8 @@ defmodule Cpfcnpj do
     end
   end
 
-  @spec digits_only(binary) :: binary
-  def digits_only(number_in) do
+  @spec extract_digits(binary) :: binary
+  def extract_digits(number_in) do
     String.replace(number_in, ~r/[\.\/-]/, "")
   end
 
