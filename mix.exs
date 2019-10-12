@@ -28,7 +28,7 @@ defmodule Brcpfcnpj.Mixfile do
 
   defp description do
     """
-    Colecao de funcoes para validacao e formatacao de CPF e CNPJ.
+    Coleção de funções para validacão e formatação de CPF e CNPJ.
 
     Validation and format for brazilian id documents (CPF/CNPJ).
     """
@@ -37,7 +37,7 @@ defmodule Brcpfcnpj.Mixfile do
   defp package do
     [
       files: ~w(lib test config mix.exs README*),
-      maintainers: ["William Gueiros"],
+      maintainers: ["William Gueiros", "Vítor Trindade"],
       licenses: ["Unlicense"],
       links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"}
     ]

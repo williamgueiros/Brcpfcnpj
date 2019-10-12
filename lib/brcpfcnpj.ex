@@ -1,6 +1,6 @@
 defmodule Brcpfcnpj do
   @moduledoc """
-  Valida Cpf/Cnpj e Formatar em String caso necessario
+  Valida Cpf/Cnpj e formata em String caso necessário
   1. O formato da string, que deve seguir o padrão xx.xxx.xxx/xxxx-xx,
   onde 'x' pode ser qualquer dígito de 0 a 9 e os traços (-), barra (/)
   e pontos (.) *são opcionais*.
@@ -14,12 +14,12 @@ defmodule Brcpfcnpj do
       iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"})
       "111.444.777-35"
 
-  Com ou sem os caracteres especiais os mesmos serao validados
+  Com ou sem os caracteres especiais os mesmos serão validados
   """
 
   @doc """
   Valida Cpf, realiza a chamada ao modulo Cpfcnpj com a estrutura correta.
-  Forca o desenvolvedor passar os parametros de forma correta
+  Força o desenvolvedor passar os parâmetros de forma correta
 
   ## Examples
 
@@ -30,7 +30,7 @@ defmodule Brcpfcnpj do
       iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "1127772-35"})
       false
 
-  Com ou sem os caracteres especiais os mesmos serao validados
+  Com ou sem os caracteres especiais os mesmos serão validados
   """
   @spec cpf_valid?(%Cpf{number: String.t()}) :: boolean()
   def cpf_valid?(cpf = %Cpf{}) do
@@ -38,8 +38,8 @@ defmodule Brcpfcnpj do
   end
 
   @doc """
-  Valida Cnpj, realiza a chamada ao modulo Cpfcnpj com a estrutura correta.
-  Forca o desenvolvedor passar os parametros de forma correta
+  Valida Cnpj, realiza a chamada ao módulo Cpfcnpj com a estrutura correta.
+  Força o desenvolvedor passar os parâmetros de forma correta
 
   ## Examples
 
@@ -58,7 +58,7 @@ defmodule Brcpfcnpj do
 
   @doc """
   Valida o Cpf e retorna uma String do Cpf formatado.
-  Caso seja invalido retorna nil
+  Caso seja inválido retorna `nil`
 
   ## Examples
 
@@ -75,7 +75,7 @@ defmodule Brcpfcnpj do
 
   @doc """
   Valida o Cnpj e retorna uma String do Cnpj formatado.
-  Caso seja invalido retorna nil
+  Caso seja inválido retorna `nil`
 
   ## Examples
 
@@ -92,7 +92,7 @@ defmodule Brcpfcnpj do
 
   @doc """
   Responsavel por gerar um Cpf válido, formatado ou não.
-  Caso seja passado o parametro true recebera o mesmo formatado
+  Caso seja passado o parâmetro true recebera o mesmo formatado
   """
   @spec cpf_generate(boolean() | nil) :: String.t()
   def cpf_generate(format \\ false) do
@@ -103,7 +103,7 @@ defmodule Brcpfcnpj do
 
   @doc """
   Responsavel por gerar um Cnpj válido, formatado ou não.
-  Caso seja passado o parametro true recebera o mesmo formatado
+  Caso seja passado o parâmetro true recebera o mesmo formatado
   """
   @spec cnpj_generate(boolean() | nil) :: String.t()
   def cnpj_generate(format \\ false) do
