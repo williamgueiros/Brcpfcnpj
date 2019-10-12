@@ -5,7 +5,7 @@ defmodule Brcpfcnpj.Mixfile do
     [
       app: :brcpfcnpj,
       version: "0.2.0",
-      elixir: "~> 1.4",
+      elixir: "~> 1.7",
       description: description(),
       package: package(),
       deps: deps()
@@ -18,17 +18,17 @@ defmodule Brcpfcnpj.Mixfile do
 
   defp deps do
     [
-      {:earmark, "~> 1.2", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.18.0", only: :dev, runtime: false},
-      {:inch_ex, "~> 0.5.6", only: :docs, runtime: false},
-      {:credo, "~> 1.1", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.6", only: :dev, runtime: false}
+      {:earmark, "~> 1.4", only: [:dev, :docs], runtime: false},
+      {:ex_doc, "~> 0.21.2", only: [:dev, :docs], runtime: false},
+      {:inch_ex, "~> 2.0", only: :docs, runtime: false},
+      {:credo, "~> 1.1.5", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false}
     ]
   end
 
   defp description do
     """
-    Colecao de funcoes para validacao e formatacao de CPF e CNPJ.
+    Coleção de funções para validacão e formatação de CPF e CNPJ.
 
     Validation and format for brazilian id documents (CPF/CNPJ).
     """
@@ -37,7 +37,7 @@ defmodule Brcpfcnpj.Mixfile do
   defp package do
     [
       files: ~w(lib test config mix.exs README*),
-      maintainers: ["William Gueiros"],
+      maintainers: ["William Gueiros", "Vítor Trindade"],
       licenses: ["Unlicense"],
       links: %{"GitHub" => "https://github.com/williamgueiros/Brcpfcnpj"}
     ]

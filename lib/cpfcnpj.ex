@@ -1,6 +1,6 @@
 defmodule Cpfcnpj do
   @moduledoc """
-  Modulo responsavel pro realizar todos os calculos de validacao.
+  Módulo responsável por realizar todos os cálculos de validação.
 
   ## Examples
 
@@ -9,7 +9,7 @@ defmodule Cpfcnpj do
       iex>Cpfcnpj.valid?({:cpf,"111.444.777-35"})
       true
 
-  Com ou sem os caracteres especiais os mesmos serao validados
+  Com ou sem os caracteres especiais os mesmos serão validados
   """
   @division 11
 
@@ -24,7 +24,7 @@ defmodule Cpfcnpj do
   @cnpj_regex ~r/(\d{2})?(\d{3})?(\d{3})?(\d{4})?(\d{2})/
 
   @doc """
-  Valida cpf/cnpj caracteres especias nao sao levados em consideracao.
+  Valida cpf/cnpj caracteres especias não são levados em consideração.
 
   ## Examples
 
@@ -100,7 +100,7 @@ defmodule Cpfcnpj do
 
   @doc """
   Valida o Cpf/Cnpj e retorna uma String com o mesmo formatado.
-  Caso seja invalido retorna nil
+  Caso seja inválido retorna `nil`
 
   ## Examples
       iex> Cpfcnpj.format_number({:cnpj,"69.103.604/0001-60"})
@@ -125,7 +125,7 @@ defmodule Cpfcnpj do
   end
 
   @doc """
-  Gerador de cpf/cnpj concatenado com o digito verificador.
+  Gerador de cpf/cnpj concatenado com o dígito verificador.
   """
   @spec generate(:cpf | :cnpj) :: String.t()
   def generate(tp_cpfcnpj) do
