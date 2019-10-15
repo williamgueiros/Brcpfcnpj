@@ -34,7 +34,7 @@ defmodule Brcpfcnpj do
   """
   @spec cpf_valid?(%Cpf{number: String.t()}) :: boolean()
   def cpf_valid?(cpf = %Cpf{}) do
-    Cpfcnpj.valid?({cpf.tp_data, cpf.number})
+    Cpfcnpj.valid?({:cpf, cpf.number})
   end
 
   @doc """
@@ -53,7 +53,7 @@ defmodule Brcpfcnpj do
   """
   @spec cnpj_valid?(%Cnpj{number: String.t()}) :: boolean()
   def cnpj_valid?(cnpj = %Cnpj{}) do
-    Cpfcnpj.valid?({cnpj.tp_data, cnpj.number})
+    Cpfcnpj.valid?({:cnpj, cnpj.number})
   end
 
   @doc """
@@ -70,7 +70,7 @@ defmodule Brcpfcnpj do
   """
   @spec cpf_format(%Cpf{number: String.t()}) :: String.t()
   def cpf_format(cpf = %Cpf{}) do
-    Cpfcnpj.format_number({cpf.tp_data, cpf.number})
+    Cpfcnpj.format_number({:cpf, cpf.number})
   end
 
   @doc """
@@ -87,7 +87,7 @@ defmodule Brcpfcnpj do
   """
   @spec cnpj_format(%Cnpj{number: String.t()}) :: String.t()
   def cnpj_format(cnpj = %Cnpj{}) do
-    Cpfcnpj.format_number({cnpj.tp_data, cnpj.number})
+    Cpfcnpj.format_number({:cnpj, cnpj.number})
   end
 
   @doc """
@@ -96,9 +96,8 @@ defmodule Brcpfcnpj do
   """
   @spec cpf_generate(boolean() | nil) :: String.t()
   def cpf_generate(format \\ false) do
-    tp_data = %Cpf{}.tp_data
-    cpf = Cpfcnpj.generate(tp_data)
-    if format, do: Cpfcnpj.format_number({tp_data, cpf}), else: cpf
+    cpf = Cpfcnpj.generate(:cpf)
+    if format, do: Cpfcnpj.format_number({:cpf, cpf}), else: cpf
   end
 
   @doc """
@@ -107,8 +106,7 @@ defmodule Brcpfcnpj do
   """
   @spec cnpj_generate(boolean() | nil) :: String.t()
   def cnpj_generate(format \\ false) do
-    tp_data = %Cnpj{}.tp_data
-    cnpj = Cpfcnpj.generate(tp_data)
-    if format, do: Cpfcnpj.format_number({tp_data, cnpj}), else: cnpj
+    cnpj = Cpfcnpj.generate(:cnpj)
+    if format, do: Cpfcnpj.format_number({:cnpj, cnpj}), else: cnpj
   end
 end
