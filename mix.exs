@@ -22,7 +22,8 @@ defmodule Brcpfcnpj.Mixfile do
       {:ex_doc, "~> 0.21.2", only: [:dev, :docs], runtime: false},
       {:inch_ex, "~> 2.0", only: :docs, runtime: false},
       {:credo, "~> 1.1.5", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false}
+      {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false},
+      {:ecto, "~> 3.2", optional: true}
     ]
   end
 

@@ -64,7 +64,7 @@ defmodule Brcpfcnpj.Changeset do
   def validate_cpf(changeset, field, opts) when is_atom(field) do
     validate(changeset, field, fn value ->
       if Brcpfcnpj.cpf_valid?(%Cpf{number: value}) do
-         []
+        []
       else
         [{field, message(opts, {"Invalid Cpf", validation: :cpf})}]
       end

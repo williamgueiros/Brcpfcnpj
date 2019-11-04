@@ -42,22 +42,29 @@ defmodule Cpfcnpj do
   end
 
   defp check_number(tp_cpfcnpj) do
-    cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[\.\/-]/, "")
+    cpfcnpj = tp_cpfcnpj |> elem(1) |> extract_digits()
 
-    all_equal =
-      String.replace(cpfcnpj, String.at(cpfcnpj, 0), "")
+    all_equal? =
+      cpfcnpj
+      |> String.replace(String.at(cpfcnpj, 0), "")
       |> String.length()
+      |> Kernel.==(0)
 
-    case tp_cpfcnpj do
-      {:cpf, _} ->
-        if String.length(cpfcnpj) != @cpf_length or all_equal == 0 do
-          :error
-        end
+    type = elem(tp_cpfcnpj, 0)
+    cpfcnpj_length = String.length(cpfcnpj)
 
-      {:cnpj, _} ->
-        if String.length(cpfcnpj) != @cnpj_length or all_equal == 0 do
-          :error
-        end
+    cond do
+      all_equal? ->
+        :error
+
+      :cpf == type and cpfcnpj_length != @cpf_length ->
+        :error
+
+      :cnpj == type and cpfcnpj_length != @cnpj_length ->
+        :error
+
+      true ->
+        :ok
     end
   end
 
@@ -122,6 +129,11 @@ defmodule Cpfcnpj do
     else
       nil
     end
+  end
+
+  @spec extract_digits(binary) :: binary
+  def extract_digits(number_in) do
+    String.replace(number_in, ~r/[\.\/-]/, "")
   end
 
   @doc """
