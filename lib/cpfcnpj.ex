@@ -32,7 +32,7 @@ defmodule Cpfcnpj do
       true
 
   """
-  @spec valid?({:cpf | :cnpj, String.t()}) :: String.t() | false
+  @spec valid?({:cpf | :cnpj, String.t()}) :: boolean()
   def valid?(number_in) do
     if check_number(number_in) != :error, do: type_checker(number_in), else: false
   end
