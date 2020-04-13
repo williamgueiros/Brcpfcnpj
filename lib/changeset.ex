@@ -4,7 +4,7 @@ if Code.ensure_compiled(Ecto) do
     Define funções para serem utilizadas em conjunto com a API de changeset do Ecto.
     """
 
-    @type t :: Ecto.Changeset.t()
+    @type changeset :: Ecto.Changeset.t()
     @type error :: {atom, error_message}
     @type error_message :: String.t() | {String.t(), Keyword.t()}
 
@@ -22,7 +22,7 @@ if Code.ensure_compiled(Ecto) do
         validate_cnpj(changeset, [:cnpj, :other_cnpj])
 
     """
-    @spec validate_cnpj(t, atom | list, Keyword.t()) :: t
+    @spec validate_cnpj(changeset(), atom() | list(), Keyword.t()) :: changeset()
     def validate_cnpj(changeset, field), do: validate_cnpj(changeset, field, [])
 
     def validate_cnpj(changeset, field, opts) when is_atom(field) do
@@ -55,7 +55,7 @@ if Code.ensure_compiled(Ecto) do
         validate_cpf(changeset, [:cpf, :cnpj])
 
     """
-    @spec validate_cpf(t, atom | list, Keyword.t()) :: t
+    @spec validate_cpf(changeset(), atom() | list(), Keyword.t()) :: changeset()
     def validate_cpf(changeset, field), do: validate_cpf(changeset, field, [])
 
     def validate_cpf(changeset, field, opts) when is_atom(field) do
