@@ -10,15 +10,15 @@ otp_release:
   - 20.3
   - 21.0
   - 22.0
-  - 23.1
+  - 23.0.4
 jobs:
   exclude:
     - elixir: 1.7
-      otp_release: 23.1
+      otp_release: 23.0.4
     - elixir: 1.8
-      otp_release: 23.1
+      otp_release: 23.0.4
     - elixir: 1.9
-      otp_release: 23.1
+      otp_release: 23.0.4
     - elixir: 1.10.3
       otp_release: 20.3
     - elixir: 1.11
