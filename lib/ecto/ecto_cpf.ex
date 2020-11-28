@@ -12,14 +12,14 @@ if Code.ensure_loaded?(Ecto) do
 
     def cast(cpf) when is_binary(cpf) do
       if Cpfcnpj.valid?({:cpf, cpf}) do
-        {:ok, Cpfcnpj.extract_digits(cpf)}
+        {:ok, %Cpf{number: Cpfcnpj.extract_digits(cpf)}}
       else
         {:error, [cpf: "Invalid cpf"]}
       end
     end
 
     def cast(%Cpf{number: number}) do
-      {:ok, Cpfcnpj.extract_digits(number)}
+      cast(number)
     end
 
     def cast(_), do: :error
