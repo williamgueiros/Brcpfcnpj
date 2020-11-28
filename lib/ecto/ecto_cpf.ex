@@ -18,7 +18,9 @@ if Code.ensure_loaded?(Ecto) do
       end
     end
 
-    def cast(%Cpf{number: number}), do: {:ok, %Cpf{number: Cpfcnpj.extract_digits(number)}}
+    def cast(%Cpf{number: number}) do
+      cast(number)
+    end
 
     def cast(_), do: :error
 

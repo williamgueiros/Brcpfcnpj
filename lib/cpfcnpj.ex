@@ -23,6 +23,8 @@ defmodule Cpfcnpj do
   @cnpj_algs_2 [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0]
   @cnpj_regex ~r/(\d{2})?(\d{3})?(\d{3})?(\d{4})?(\d{2})/
 
+  defguard is_cpf_or_cnpj(type) when type in ~w(cpf cnpj)a
+
   @doc """
   Valida cpf/cnpj caracteres especias não são levados em consideração.
 
@@ -32,8 +34,8 @@ defmodule Cpfcnpj do
       true
 
   """
-  @spec valid?({:cpf | :cnpj, String.t()}) :: String.t() | false
-  def valid?(number_in) do
+  @spec valid?({:cpf | :cnpj, String.t()}) :: boolean()
+  def valid?({type, _} = number_in) when is_cpf_or_cnpj(type) do
     if check_number(number_in) != :error, do: type_checker(number_in), else: false
   end
 
@@ -41,8 +43,8 @@ defmodule Cpfcnpj do
     :error
   end
 
-  defp check_number(tp_cpfcnpj) do
-    cpfcnpj = tp_cpfcnpj |> elem(1) |> extract_digits()
+  defp check_number({type, value}) when is_cpf_or_cnpj(type) do
+    cpfcnpj = extract_digits(value)
 
     all_equal? =
       cpfcnpj
@@ -50,7 +52,6 @@ defmodule Cpfcnpj do
       |> String.length()
       |> Kernel.==(0)
 
-    type = elem(tp_cpfcnpj, 0)
     cpfcnpj_length = String.length(cpfcnpj)
 
     cond do
@@ -68,10 +69,12 @@ defmodule Cpfcnpj do
     end
   end
 
-  defp type_checker(tp_cpfcnpj) do
-    cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[^0-9]/, "")
-    first_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :first})
-    second_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :second})
+  defp type_checker({type, value}) when is_cpf_or_cnpj(type) do
+    cpfcnpj = extract_digits(value)
+
+    first_char_valid = character_valid(cpfcnpj, {type, :first})
+    second_char_valid = character_valid(cpfcnpj, {type, :second})
+
     verif = first_char_valid <> second_char_valid
     verif == String.slice(cpfcnpj, -2, 2)
   end
@@ -131,7 +134,15 @@ defmodule Cpfcnpj do
     end
   end
 
-  @spec extract_digits(binary) :: binary
+  @spec extract_digits(Cpf.t() | Cnpj.t() | binary) :: binary
+  def extract_digits(%Cpf{number: number}) do
+    extract_digits(number)
+  end
+
+  def extract_digits(%Cnpj{number: number}) do
+    extract_digits(number)
+  end
+
   def extract_digits(number_in) do
     String.replace(number_in, ~r/[\.\/-]/, "")
   end

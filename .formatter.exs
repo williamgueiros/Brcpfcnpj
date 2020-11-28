@@ -1,3 +1,4 @@
 [
-  inputs: ["mix.exs", "{config,lib,test}/**/*.{ex,exs}"]
+  import_deps: [:ecto],
+  inputs: ["*.{ex,exs}", "{config,lib,test}/**/*.{ex,exs}"]
 ]

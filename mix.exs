@@ -4,13 +4,27 @@ defmodule Brcpfcnpj.Mixfile do
   def project do
     [
       app: :brcpfcnpj,
-      version: "0.2.0",
+      version: "0.2.1",
       elixir: "~> 1.7",
+      elixirc_paths: elixirc_paths(Mix.env()),
       description: description(),
       package: package(),
-      deps: deps()
+      deps: deps(),
+      xref: [
+        exclude: [
+          Ecto.Migrator,
+          Mix.Tasks.Ecto.Migrate,
+          Mix.Tasks.Ecto.Rollback,
+          Ecto.Type,
+          Ecto.Adapters.SQL.Sandbox
+        ]
+      ]
     ]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
 
   def application do
     [applications: [:logger]]
@@ -23,7 +37,9 @@ defmodule Brcpfcnpj.Mixfile do
       {:inch_ex, "~> 2.0", only: :docs, runtime: false},
       {:credo, "~> 1.1.5", only: :dev, runtime: false},
       {:dialyxir, "~> 1.0.0-rc.7", only: :dev, runtime: false},
-      {:ecto, "~> 3.2", optional: true}
+      {:ecto, "~> 3.2", optional: true},
+      {:postgrex, ">= 0.0.0", only: :test, optional: true},
+      {:ecto_sql, "~> 3.2", only: :test, optional: true}
     ]
   end
 
