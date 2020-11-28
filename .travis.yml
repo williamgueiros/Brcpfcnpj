@@ -11,6 +11,8 @@ otp_release:
   - 21.0
   - 22.0
   - 23.0.4
+services:
+  - postgresql
 jobs:
   exclude:
     - elixir: 1.7
