@@ -34,30 +34,27 @@ defmodule Cpfcnpj do
   """
   @spec valid?({:cpf | :cnpj, String.t()}) :: boolean()
   def valid?(number_in) do
-    if check_number(number_in) != :error, do: type_checker(number_in), else: false
+    check_number(number_in) and type_checker(number_in)
   end
 
   defp check_number({_, nil}) do
-    :error
+    false
   end
 
   defp check_number(tp_cpfcnpj) do
     cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[\.\/-]/, "")
 
     all_equal =
-      String.replace(cpfcnpj, String.at(cpfcnpj, 0), "")
+      cpfcnpj
+      |> String.replace(String.at(cpfcnpj, 0), "")
       |> String.length()
 
     case tp_cpfcnpj do
       {:cpf, _} ->
-        if String.length(cpfcnpj) != @cpf_length or all_equal == 0 do
-          :error
-        end
+        String.length(cpfcnpj) == @cpf_length and all_equal != 0
 
       {:cnpj, _} ->
-        if String.length(cpfcnpj) != @cnpj_length or all_equal == 0 do
-          :error
-        end
+        String.length(cpfcnpj) == @cnpj_length and all_equal != 0
     end
   end
 
