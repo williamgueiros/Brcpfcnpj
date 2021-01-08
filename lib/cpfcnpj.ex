@@ -70,7 +70,6 @@ defmodule Cpfcnpj do
 
   # Checks special cases
   defp special_checker({:cpf, _}) do
-    # TODO
     true
   end
 
