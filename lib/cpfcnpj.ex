@@ -45,18 +45,22 @@ defmodule Cpfcnpj do
   defp check_number(tp_cpfcnpj) do
     cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[\.\/-]/, "")
 
-    all_equal =
+    all_equal? =
       cpfcnpj
       |> String.replace(String.at(cpfcnpj, 0), "")
       |> String.length()
+      |> Kernel.==(0)
 
-    case tp_cpfcnpj do
-      {:cpf, _} ->
-        String.length(cpfcnpj) == @cpf_length and all_equal != 0
+    correct_lenght? =
+      case tp_cpfcnpj do
+        {:cpf, _} ->
+          String.length(cpfcnpj) == @cpf_length
 
-      {:cnpj, _} ->
-        String.length(cpfcnpj) == @cnpj_length and all_equal != 0
-    end
+        {:cnpj, _} ->
+          String.length(cpfcnpj) == @cnpj_length
+      end
+
+    correct_lenght? and not all_equal?
   end
 
   # Checks validation digits
