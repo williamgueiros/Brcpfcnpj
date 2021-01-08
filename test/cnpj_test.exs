@@ -29,4 +29,12 @@ defmodule CnpjTest do
   test "should be invalid with nil input" do
     assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: nil}) == false
   end
+
+  test "should be invalid when starting with zeroes and ORDEM > 0300" do
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "00010000030160"}) == false
+  end
+
+  # test "should be invalid with basic numbers" do
+
+  # end
 end
