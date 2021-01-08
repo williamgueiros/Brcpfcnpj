@@ -32,6 +32,8 @@ defmodule CnpjTest do
 
   test "should be invalid when starting with zeroes and order > 0300" do
     assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "00010000030160"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "00000898246954"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "00000136747140"}) == false
   end
 
   test "should be invalid for basic orders" do
