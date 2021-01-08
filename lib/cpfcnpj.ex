@@ -51,7 +51,7 @@ defmodule Cpfcnpj do
       |> String.length()
       |> Kernel.==(0)
 
-    correct_lenght? =
+    correct_length? =
       case tp_cpfcnpj do
         {:cpf, _} ->
           String.length(cpfcnpj) == @cpf_length
@@ -60,7 +60,7 @@ defmodule Cpfcnpj do
           String.length(cpfcnpj) == @cnpj_length
       end
 
-    correct_lenght? and not all_equal?
+    correct_length? and not all_equal?
   end
 
   # Checks validation digits
