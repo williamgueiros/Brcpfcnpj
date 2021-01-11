@@ -29,4 +29,22 @@ defmodule CnpjTest do
   test "should be invalid with nil input" do
     assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: nil}) == false
   end
+
+  test "should be invalid when starting with zeroes and order > 0300" do
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "00010000030160"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "00000898246954"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "00000136747140"}) == false
+  end
+
+  test "should be invalid for basic orders" do
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "11111111030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "22222222030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "33333333030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "44444444030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "55555555030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "66666666030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "77777777030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "88888888030180"}) == false
+    assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: "99999999030180"}) == false
+  end
 end

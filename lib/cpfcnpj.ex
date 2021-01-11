@@ -34,39 +34,82 @@ defmodule Cpfcnpj do
   """
   @spec valid?({:cpf | :cnpj, String.t()}) :: boolean()
   def valid?(number_in) do
-    if check_number(number_in) != :error, do: type_checker(number_in), else: false
+    check_number(number_in) and type_checker(number_in) and special_checker(number_in)
   end
 
   defp check_number({_, nil}) do
-    :error
+    false
   end
 
+  # Checks length and if all are equal
   defp check_number(tp_cpfcnpj) do
     cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[\.\/-]/, "")
 
-    all_equal =
-      String.replace(cpfcnpj, String.at(cpfcnpj, 0), "")
+    all_equal? =
+      cpfcnpj
+      |> String.replace(String.at(cpfcnpj, 0), "")
       |> String.length()
+      |> Kernel.==(0)
 
-    case tp_cpfcnpj do
-      {:cpf, _} ->
-        if String.length(cpfcnpj) != @cpf_length or all_equal == 0 do
-          :error
-        end
+    correct_length? =
+      case tp_cpfcnpj do
+        {:cpf, _} ->
+          String.length(cpfcnpj) == @cpf_length
 
-      {:cnpj, _} ->
-        if String.length(cpfcnpj) != @cnpj_length or all_equal == 0 do
-          :error
-        end
-    end
+        {:cnpj, _} ->
+          String.length(cpfcnpj) == @cnpj_length
+      end
+
+    correct_length? and not all_equal?
   end
 
+  # Checks validation digits
   defp type_checker(tp_cpfcnpj) do
     cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[^0-9]/, "")
     first_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :first})
     second_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :second})
     verif = first_char_valid <> second_char_valid
     verif == String.slice(cpfcnpj, -2, 2)
+  end
+
+  # Checks special cases
+  defp special_checker({:cpf, _}) do
+    true
+  end
+
+  defp special_checker({:cnpj, _} = tp_cpfcnpj) do
+    cnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[\.\/-]/, "")
+
+    order = String.slice(cnpj, 8..11)
+
+    first_three_digits = String.slice(cnpj, 0..2)
+
+    basic = String.slice(cnpj, 0..7)
+
+    not_allowed_basics = basic in ~w<
+      11111111
+      22222222
+      33333333
+      44444444
+      55555555
+      66666666
+      77777777
+      88888888
+      99999999 >
+
+    cond do
+      not_allowed_basics ->
+        false
+
+      order == "0000" ->
+        false
+
+      String.to_integer(order) > 300 and first_three_digits == "000" and basic != "00000000" ->
+        false
+
+      true ->
+        true
+    end
   end
 
   defp mult_sum(algs, cpfcnpj) do
