@@ -176,7 +176,15 @@ defmodule Cpfcnpj do
     first_valid_char = character_valid(numbers, {tp_cpfcnpj, :first})
     second_valid_char = character_valid(numbers <> first_valid_char, {tp_cpfcnpj, :second})
 
-    numbers <> first_valid_char <> second_valid_char
+    result = numbers <> first_valid_char <> second_valid_char
+
+    # Chance de gerar um inválido seguindo esse algoritmo é baixa o suficiente que
+    # vale a pena simplesmente retentar caso o resultado for inválido
+    if valid?({tp_cpfcnpj, result}) do
+      result
+    else
+      generate(tp_cpfcnpj)
+    end
   end
 
   defp random_numbers(tp_cpfcnpj) do

@@ -57,7 +57,7 @@ defmodule BrcpfcnpjTest do
     end)
   end
 
-  test "should always generate valid cpjs" do
+  test "should always generate valid cnpjs" do
     Enum.each(0..5000, fn _ ->
       assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: Brcpfcnpj.cnpj_generate()})
     end)
