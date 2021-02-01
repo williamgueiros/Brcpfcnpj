@@ -50,4 +50,16 @@ defmodule BrcpfcnpjTest do
     assert cnpj |> String.length() == 14
     assert %Cnpj{number: cnpj} |> Brcpfcnpj.cnpj_valid?()
   end
+
+  test "should always generate valid cpfs" do
+    Enum.each(0..5000, fn _ ->
+      assert Brcpfcnpj.cpf_valid?(%Cpf{number: Brcpfcnpj.cpf_generate()})
+    end)
+  end
+
+  test "should always generate valid cnpjs" do
+    Enum.each(0..5000, fn _ ->
+      assert Brcpfcnpj.cnpj_valid?(%Cnpj{number: Brcpfcnpj.cnpj_generate()})
+    end)
+  end
 end

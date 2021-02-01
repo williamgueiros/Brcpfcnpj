@@ -92,7 +92,7 @@ defmodule Brcpfcnpj do
 
   @doc """
   Responsavel por gerar um Cpf válido, formatado ou não.
-  Caso seja passado o parâmetro true recebera o mesmo formatado
+  Caso seja passado o parâmetro true retornará o mesmo formatado
   """
   @spec cpf_generate() :: String.t()
   @spec cpf_generate(boolean()) :: String.t()
@@ -104,7 +104,7 @@ defmodule Brcpfcnpj do
 
   @doc """
   Responsavel por gerar um Cnpj válido, formatado ou não.
-  Caso seja passado o parâmetro true recebera o mesmo formatado
+  Caso seja passado o parâmetro true retornará o mesmo formatado
   """
   @spec cnpj_generate() :: String.t()
   @spec cnpj_generate(boolean()) :: String.t()

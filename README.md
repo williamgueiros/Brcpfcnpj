@@ -12,7 +12,7 @@ Adicione ao `mix.exs` do seu projeto:
 
 ```elixir
 defp deps do
-  [{:brcpfcnpj, "~> 0.2.0"}]
+  [{:brcpfcnpj, "~> 0.2.3"}]
 end
 ```
 
