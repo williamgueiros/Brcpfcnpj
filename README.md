@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/williamgueiros/Brcpfcnpj.svg?branch=master)](https://travis-ci.org/williamgueiros/Brcpfcnpj)
+# Brcpfcnpj
+
 [![Inline docs](http://inch-ci.org/github/williamgueiros/Brcpfcnpj.svg?branch=master)](http://inch-ci.org/github/williamgueiros/Brcpfcnpj)
 
-# Brcpfcnpj
+
 
 Coleção de funções para validação e formatação de CPF e CNPJ. Veja a
 [documentação online](http://hexdocs.pm/brcpfcnpj/).
@@ -17,7 +18,6 @@ end
 ```
 
 > Para Elixir `< 1.2` utilize a versão `0.0.11`. [Veja detalhes](https://github.com/williamgueiros/Brcpfcnpj/issues/5).
-
 > Para Ecto `< 2` utilize a versão `0.1.2`. [Veja detalhes](https://github.com/williamgueiros/Brcpfcnpj/pull/17).
 
 ## Validação de CPF/CNPJ
@@ -127,8 +127,8 @@ Em caso de duvida [veja mais detalhes](https://github.com/williamgueiros/Brcpfcn
 * [Prakash](https://github.com/prem-prakash)
 * [João Thallis](https://github.com/joaothallis)
 * [Esdras](https://github.com/esdras)
+* [Vítor Trindade](https://github.com/VitorTrin)
 
 ## Agradecimentos
 
 Inspirado na gem [brcpfcnpj](https://github.com/tapajos/brazilian-rails/tree/master/brcpfcnpj).
-
