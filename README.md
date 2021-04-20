@@ -1,5 +1,6 @@
 # Brcpfcnpj
 
+![Build Status](https://github.com/williamgueiros/Brcpfcnpj/actions/workflows/elixir.yml/badge.svg)
 [![Inline docs](http://inch-ci.org/github/williamgueiros/Brcpfcnpj.svg?branch=master)](http://inch-ci.org/github/williamgueiros/Brcpfcnpj)
 
 
