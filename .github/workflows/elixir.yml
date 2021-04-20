@@ -10,14 +10,18 @@ jobs:
   build:
     name: Build and test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        elixir-version: [1.7, 1.8, 1.9, 1.10.3, 1.11]
+        otp-version: [20.3, 21.0, 22.0, 23.0.4]
 
     steps:
       - uses: actions/checkout@v2
       - name: Set up Elixir
         uses: erlef/setup-elixir@885971a72ed1f9240973bd92ab57af8c1aa68f24
         with:
-          elixir-version: "1.10.3" # Define the elixir version [required]
-          otp-version: "22.3" # Define the OTP version [required]
+          elixir-version: ${{ matrix.elixir-version}} # Define the elixir version [required]
+          otp-version: ${{matrix.otp-version}} # Define the OTP version [required]
       - name: Restore dependencies cache
         uses: actions/cache@v2
         with:
