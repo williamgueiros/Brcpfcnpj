@@ -68,7 +68,7 @@ defmodule Brcpfcnpj do
       nil
 
   """
-  @spec cpf_format(%Cpf{number: String.t()}) :: String.t()
+  @spec cpf_format(%Cpf{number: String.t()}) :: String.t() | nil
   def cpf_format(cpf = %Cpf{}) do
     Cpfcnpj.format_number({cpf.tp_data, cpf.number})
   end
@@ -85,7 +85,7 @@ defmodule Brcpfcnpj do
       nil
 
   """
-  @spec cnpj_format(%Cnpj{number: String.t()}) :: String.t()
+  @spec cnpj_format(%Cnpj{number: String.t()}) :: String.t() | nil
   def cnpj_format(cnpj = %Cnpj{}) do
     Cpfcnpj.format_number({cnpj.tp_data, cnpj.number})
   end
