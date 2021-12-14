@@ -32,7 +32,7 @@ defmodule Brcpfcnpj do
 
   Com ou sem os caracteres especiais os mesmos serão validados
   """
-  @spec cpf_valid?(%Cpf{number: String.t()}) :: boolean()
+  @spec cpf_valid?(Cpf.t()) :: boolean()
   def cpf_valid?(cpf = %Cpf{}) do
     Cpfcnpj.valid?({cpf.tp_data, cpf.number})
   end
@@ -51,7 +51,7 @@ defmodule Brcpfcnpj do
       false
 
   """
-  @spec cnpj_valid?(%Cnpj{number: String.t()}) :: boolean()
+  @spec cnpj_valid?(Cnpj.t()) :: boolean()
   def cnpj_valid?(cnpj = %Cnpj{}) do
     Cpfcnpj.valid?({cnpj.tp_data, cnpj.number})
   end
@@ -68,7 +68,7 @@ defmodule Brcpfcnpj do
       nil
 
   """
-  @spec cpf_format(%Cpf{number: String.t()}) :: String.t()
+  @spec cpf_format(Cpf.t()) :: String.t()
   def cpf_format(cpf = %Cpf{}) do
     Cpfcnpj.format_number({cpf.tp_data, cpf.number})
   end
@@ -85,7 +85,7 @@ defmodule Brcpfcnpj do
       nil
 
   """
-  @spec cnpj_format(%Cnpj{number: String.t()}) :: String.t()
+  @spec cnpj_format(Cnpj.t()) :: String.t()
   def cnpj_format(cnpj = %Cnpj{}) do
     Cpfcnpj.format_number({cnpj.tp_data, cnpj.number})
   end
