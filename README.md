@@ -14,12 +14,9 @@ Adicione ao `mix.exs` do seu projeto:
 
 ```elixir
 defp deps do
-  [{:brcpfcnpj, "~> 0.2.3"}]
+  [{:brcpfcnpj, "~> 1.0.0"}]
 end
 ```
-
-> Para Elixir `< 1.2` utilize a versão `0.0.11`. [Veja detalhes](https://github.com/williamgueiros/Brcpfcnpj/issues/5).
-> Para Ecto `< 2` utilize a versão `0.1.2`. [Veja detalhes](https://github.com/williamgueiros/Brcpfcnpj/pull/17).
 
 ## Validação de CPF/CNPJ
 
@@ -33,10 +30,10 @@ sendo os traços `-`, barra `/` e pontos `.` opcionais.
 A função `Brcpfcnpj.cpf_valid?/1` verifica se uma String é um CPF válido:
 
 ```elixir
-cpf = %Cpf{number: "11144477735"}
+cpf = "11144477735"
 Brcpfcnpj.cpf_valid?(cpf) # ==> true
 
-cpf = %Cpf{number: "111.444.777-35"}
+cpf = "111.444.777-35"
 Brcpfcnpj.cpf_valid?(cpf) # ==> true
 
 ````
@@ -44,10 +41,10 @@ Brcpfcnpj.cpf_valid?(cpf) # ==> true
 A função `Brcpfcnpj.cnpj_valid?/1` verifica se uma String é um CNPJ válido:
 
 ```elixir
-cnpj = %Cnpj{number: "69103604000160"}
+cnpj = "69103604000160"
 Brcpfcnpj.cnpj_valid?(cnpj)# ==> true
 
-cnpj = %Cnpj{number: "69.103.604/0001-60"}
+cnpj = "69.103.604/0001-60"
 Brcpfcnpj.cnpj_valid?(cnpj)# ==> true
 ````
 
@@ -57,42 +54,41 @@ As funções `Brcpfcnpj.cpf_format/1` e `Brcpfcnpj.cnpj_format` retornam a Strin
 não for válida, as funções retornam nil.
 
 ```elixir
-cpf = %Cpf{number: "11144477735"}
+cpf = "11144477735"
 Brcpfcnpj.cpf_format(cpf)  # ==>"111.444.777-35"
 
-cpf = %Cpf{number: "11144477734"}
+cpf = number: "11144477734"
 Brcpfcnpj.cpf_format(cpf)  # ==> nil
 
 ````
 
 ```elixir
-cnpj = %Cnpj{number: "69103604000160"}
+cnpj = "69103604000160"
 Brcpfcnpj.cnpj_format(cnpj) # ==>"69.103.604/0001-60"
 
-cnpj = %Cnpj{number: "69103604000161"}
+cnpj = "69103604000161"
 Brcpfcnpj.cnpj_format(cnpj) # ==> nil
 ````
 
 ## Gerando números CPF e CNPJ
 
-Use as funções `Brcpfcnpj.cpf_generate/1` e `Brcpfcnpj.cnpj_generate/1` para gerar CPFs e CNPJs válidos. O parâmetro
-das funções indica se os números devem ser formatados.
+Use as funções `Brcpfcnpj.cpf_generate/1` e `Brcpfcnpj.cnpj_generate/1` para gerar CPFs e CNPJs válidos. O parâmetro indica se os números devem ser formatados.
 
 ```elixir
-Brcpfcnpj.cpf_generate true
+Brcpfcnpj.cpf_generate(true)
 "468.535.974-78"
 
-Brcpfcnpj.cnpj_generate true
+Brcpfcnpj.cnpj_generate(true)
 "45.044.251/6215-69"
 ````
 
 Sem formatação:
 
 ```elixir
-Brcpfcnpj.cpf_generate
+Brcpfcnpj.cpf_generate()
 "02239513403"
 
-Brcpfcnpj.cnpj_generate
+Brcpfcnpj.cnpj_generate()
 "17463578863541"
 ````
 

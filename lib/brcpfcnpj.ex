@@ -7,34 +7,44 @@ defmodule Brcpfcnpj do
   2. O conteúdo numérico desta string, que é validado através do cálculo
   do 'módulo 11' dos dígitos que compõem a string.
 
+  Antes da 1.0.0, se usava extensivamente structs, mas elas não possuem nenhum valor,
+  de modo que para manter a retrocompatibilidade algumas funções ainda aceitam as structs,
+  mas elas não são mais o input primário, sendo strings puras o jeito preferido
+
   ## Examples
 
+      iex> Brcpfcnpj.cpf_valid?("111.444.777-35")
+      true
+      iex> Brcpfcnpj.cpf_format("11144477735")
+      "111.444.777-35"
       iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "111.444.777-35"})
       true
       iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"})
       "111.444.777-35"
 
-  Com ou sem os caracteres especiais os mesmos serão validados
+  Com ou sem os caracteres especiais, em struct ou string os mesmos serão validados
   """
 
   @doc """
-  Valida Cpf, realiza a chamada ao modulo Cpfcnpj com a estrutura correta.
-  Força o desenvolvedor passar os parâmetros de forma correta
 
   ## Examples
 
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "11144477735"})
+      iex> Brcpfcnpj.cpf_valid?("11144477735")
       true
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "111.444.777-35"})
+      iex> Brcpfcnpj.cpf_valid?("111.444.777-35")
       true
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "1127772-35"})
+      iex> Brcpfcnpj.cpf_valid?("1127772-35")
       false
 
   Com ou sem os caracteres especiais os mesmos serão validados
   """
-  @spec cpf_valid?(Cpf.t()) :: boolean()
+  @spec cpf_valid?(Cpf.t() | String.t()) :: boolean()
   def cpf_valid?(cpf = %Cpf{}) do
     Cpfcnpj.valid?({cpf.tp_data, cpf.number})
+  end
+
+  def cpf_valid?(cpf) do
+    Cpfcnpj.valid?({:cpf, cpf})
   end
 
   @doc """
@@ -43,17 +53,21 @@ defmodule Brcpfcnpj do
 
   ## Examples
 
-      iex> Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69103604000160"})
+      iex> Brcpfcnpj.cnpj_valid?("69103604000160")
       true
-      iex> Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69.103.604/0001-60"})
+      iex> Brcpfcnpj.cnpj_valid?("69.103.604/0001-60")
       true
-      iex> Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69./0001-60"})
+      iex> Brcpfcnpj.cnpj_valid?("69./0001-60")
       false
 
   """
-  @spec cnpj_valid?(Cnpj.t()) :: boolean()
+  @spec cnpj_valid?(Cnpj.t() | String.t()) :: boolean()
   def cnpj_valid?(cnpj = %Cnpj{}) do
     Cpfcnpj.valid?({cnpj.tp_data, cnpj.number})
+  end
+
+  def cnpj_valid?(cnpj) do
+    Cpfcnpj.valid?({:cnpj, cnpj})
   end
 
   @doc """
@@ -62,16 +76,20 @@ defmodule Brcpfcnpj do
 
   ## Examples
 
-      iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"})
+      iex> Brcpfcnpj.cpf_format("11144477735")
       "111.444.777-35"
-      iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477734"})
+      iex> Brcpfcnpj.cpf_format("11144477734")
       nil
 
   """
-  
-  @spec cpf_format(Cpf.t()) :: String.t() | nil
+
+  @spec cpf_format(Cpf.t() | String.t()) :: String.t() | nil
   def cpf_format(cpf = %Cpf{}) do
     Cpfcnpj.format_number({cpf.tp_data, cpf.number})
+  end
+
+  def cpf_format(cpf) do
+    Cpfcnpj.format_number({:cpf, cpf})
   end
 
   @doc """
@@ -80,15 +98,19 @@ defmodule Brcpfcnpj do
 
   ## Examples
 
-      iex> Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000160"})
+      iex> Brcpfcnpj.cnpj_format("69103604000160")
       "69.103.604/0001-60"
-      iex> Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000161"})
+      iex> Brcpfcnpj.cnpj_format("69103604000161")
       nil
 
   """
-  @spec cnpj_format(Cnpj.t()) :: String.t() | nil
+  @spec cnpj_format(Cnpj.t() | String.t()) :: String.t() | nil
   def cnpj_format(cnpj = %Cnpj{}) do
     Cpfcnpj.format_number({cnpj.tp_data, cnpj.number})
+  end
+
+  def cnpj_format(cnpj) do
+    Cpfcnpj.format_number({:cnpj, cnpj})
   end
 
   @doc """
