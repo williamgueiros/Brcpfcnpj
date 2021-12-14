@@ -7,22 +7,15 @@ defmodule Brcpfcnpj do
   2. O conteúdo numérico desta string, que é validado através do cálculo
   do 'módulo 11' dos dígitos que compõem a string.
 
-  Antes da 1.0.0, se usava extensivamente structs, mas elas não possuem nenhum valor,
-  de modo que para manter a retrocompatibilidade algumas funções ainda aceitam as structs,
-  mas elas não são mais o input primário, sendo strings puras o jeito preferido
-
   ## Examples
 
       iex> Brcpfcnpj.cpf_valid?("111.444.777-35")
       true
       iex> Brcpfcnpj.cpf_format("11144477735")
       "111.444.777-35"
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "111.444.777-35"})
-      true
-      iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"})
-      "111.444.777-35"
 
-  Com ou sem os caracteres especiais, em struct ou string os mesmos serão validados
+
+  Com ou sem os caracteres especiais os mesmos serão validados
   """
 
   @doc """
@@ -38,11 +31,7 @@ defmodule Brcpfcnpj do
 
   Com ou sem os caracteres especiais os mesmos serão validados
   """
-  @spec cpf_valid?(Cpf.t() | String.t()) :: boolean()
-  def cpf_valid?(cpf = %Cpf{}) do
-    Cpfcnpj.valid?({cpf.tp_data, cpf.number})
-  end
-
+  @spec cpf_valid?(String.t()) :: boolean()
   def cpf_valid?(cpf) do
     Cpfcnpj.valid?({:cpf, cpf})
   end
@@ -61,11 +50,7 @@ defmodule Brcpfcnpj do
       false
 
   """
-  @spec cnpj_valid?(Cnpj.t() | String.t()) :: boolean()
-  def cnpj_valid?(cnpj = %Cnpj{}) do
-    Cpfcnpj.valid?({cnpj.tp_data, cnpj.number})
-  end
-
+  @spec cnpj_valid?(String.t()) :: boolean()
   def cnpj_valid?(cnpj) do
     Cpfcnpj.valid?({:cnpj, cnpj})
   end
@@ -82,12 +67,7 @@ defmodule Brcpfcnpj do
       nil
 
   """
-
-  @spec cpf_format(Cpf.t() | String.t()) :: String.t() | nil
-  def cpf_format(cpf = %Cpf{}) do
-    Cpfcnpj.format_number({cpf.tp_data, cpf.number})
-  end
-
+  @spec cpf_format(String.t()) :: String.t() | nil
   def cpf_format(cpf) do
     Cpfcnpj.format_number({:cpf, cpf})
   end
@@ -104,11 +84,7 @@ defmodule Brcpfcnpj do
       nil
 
   """
-  @spec cnpj_format(Cnpj.t() | String.t()) :: String.t() | nil
-  def cnpj_format(cnpj = %Cnpj{}) do
-    Cpfcnpj.format_number({cnpj.tp_data, cnpj.number})
-  end
-
+  @spec cnpj_format(String.t()) :: String.t() | nil
   def cnpj_format(cnpj) do
     Cpfcnpj.format_number({:cnpj, cnpj})
   end
@@ -120,9 +96,13 @@ defmodule Brcpfcnpj do
   @spec cpf_generate() :: String.t()
   @spec cpf_generate(boolean()) :: String.t()
   def cpf_generate(format \\ false) do
-    tp_data = %Cpf{}.tp_data
-    cpf = Cpfcnpj.generate(tp_data)
-    if format, do: Cpfcnpj.format_number({tp_data, cpf}), else: cpf
+    cpf = Cpfcnpj.generate(:cpf)
+
+    if format do
+      Cpfcnpj.format_number({:cpf, cpf})
+    else
+      cpf
+    end
   end
 
   @doc """
@@ -132,8 +112,12 @@ defmodule Brcpfcnpj do
   @spec cnpj_generate() :: String.t()
   @spec cnpj_generate(boolean()) :: String.t()
   def cnpj_generate(format \\ false) do
-    tp_data = %Cnpj{}.tp_data
-    cnpj = Cpfcnpj.generate(tp_data)
-    if format, do: Cpfcnpj.format_number({tp_data, cnpj}), else: cnpj
+    cnpj = Cpfcnpj.generate(:cnpj)
+
+    if format do
+      Cpfcnpj.format_number({:cnpj, cnpj})
+    else
+      cnpj
+    end
   end
 end

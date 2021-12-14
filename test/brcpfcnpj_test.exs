@@ -1,11 +1,8 @@
 defmodule BrcpfcnpjTest do
+  @moduledoc false
   use ExUnit.Case
   doctest Brcpfcnpj
   doctest Cpfcnpj
-
-  test "should accept cpf struct for backwards compatibily" do
-    assert Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"}) == "111.444.777-35"
-  end
 
   test "should return the formated cpf" do
     assert Brcpfcnpj.cpf_format("11144477735") == "111.444.777-35"
@@ -57,7 +54,7 @@ defmodule BrcpfcnpjTest do
 
   test "should always generate valid cpfs" do
     Enum.each(0..5000, fn _ ->
-      assert Brcpfcnpj.cpf_valid?(%Cpf{number: Brcpfcnpj.cpf_generate()})
+      assert Brcpfcnpj.cpf_valid?(Brcpfcnpj.cpf_generate())
     end)
   end
 
