@@ -113,17 +113,16 @@ defmodule Cpfcnpj do
   end
 
   defp character_valid(cpfcnpj, valid_type) do
-    array =
-      case valid_type do
-        {:cpf, :first} -> @cpf_algs_1
-        {:cnpj, :first} -> @cnpj_algs_1
-        {:cpf, :second} -> @cpf_algs_2
-        {:cnpj, :second} -> @cnpj_algs_2
-      end
-
-    mult_sum(array, cpfcnpj)
+    valid_type
+    |> case do
+      {:cpf, :first} -> @cpf_algs_1
+      {:cnpj, :first} -> @cnpj_algs_1
+      {:cpf, :second} -> @cpf_algs_2
+      {:cnpj, :second} -> @cnpj_algs_2
+    end
+    |> mult_sum(cpfcnpj)
     |> rem(@division)
-    |> character_calc
+    |> character_calc()
     |> Integer.to_string()
   end
 

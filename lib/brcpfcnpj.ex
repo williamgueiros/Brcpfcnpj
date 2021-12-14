@@ -9,32 +9,31 @@ defmodule Brcpfcnpj do
 
   ## Examples
 
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "111.444.777-35"})
+      iex> Brcpfcnpj.cpf_valid?("111.444.777-35")
       true
-      iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"})
+      iex> Brcpfcnpj.cpf_format("11144477735")
       "111.444.777-35"
+
 
   Com ou sem os caracteres especiais os mesmos serão validados
   """
 
   @doc """
-  Valida Cpf, realiza a chamada ao modulo Cpfcnpj com a estrutura correta.
-  Força o desenvolvedor passar os parâmetros de forma correta
 
   ## Examples
 
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "11144477735"})
+      iex> Brcpfcnpj.cpf_valid?("11144477735")
       true
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "111.444.777-35"})
+      iex> Brcpfcnpj.cpf_valid?("111.444.777-35")
       true
-      iex> Brcpfcnpj.cpf_valid?(%Cpf{number: "1127772-35"})
+      iex> Brcpfcnpj.cpf_valid?("1127772-35")
       false
 
   Com ou sem os caracteres especiais os mesmos serão validados
   """
-  @spec cpf_valid?(Cpf.t()) :: boolean()
-  def cpf_valid?(cpf = %Cpf{}) do
-    Cpfcnpj.valid?({cpf.tp_data, cpf.number})
+  @spec cpf_valid?(String.t()) :: boolean()
+  def cpf_valid?(cpf) do
+    Cpfcnpj.valid?({:cpf, cpf})
   end
 
   @doc """
@@ -43,17 +42,17 @@ defmodule Brcpfcnpj do
 
   ## Examples
 
-      iex> Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69103604000160"})
+      iex> Brcpfcnpj.cnpj_valid?("69103604000160")
       true
-      iex> Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69.103.604/0001-60"})
+      iex> Brcpfcnpj.cnpj_valid?("69.103.604/0001-60")
       true
-      iex> Brcpfcnpj.cnpj_valid?(%Cnpj{number: "69./0001-60"})
+      iex> Brcpfcnpj.cnpj_valid?("69./0001-60")
       false
 
   """
-  @spec cnpj_valid?(Cnpj.t()) :: boolean()
-  def cnpj_valid?(cnpj = %Cnpj{}) do
-    Cpfcnpj.valid?({cnpj.tp_data, cnpj.number})
+  @spec cnpj_valid?(String.t()) :: boolean()
+  def cnpj_valid?(cnpj) do
+    Cpfcnpj.valid?({:cnpj, cnpj})
   end
 
   @doc """
@@ -62,16 +61,15 @@ defmodule Brcpfcnpj do
 
   ## Examples
 
-      iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477735"})
+      iex> Brcpfcnpj.cpf_format("11144477735")
       "111.444.777-35"
-      iex> Brcpfcnpj.cpf_format(%Cpf{number: "11144477734"})
+      iex> Brcpfcnpj.cpf_format("11144477734")
       nil
 
   """
-  
-  @spec cpf_format(Cpf.t()) :: String.t() | nil
-  def cpf_format(cpf = %Cpf{}) do
-    Cpfcnpj.format_number({cpf.tp_data, cpf.number})
+  @spec cpf_format(String.t()) :: String.t() | nil
+  def cpf_format(cpf) do
+    Cpfcnpj.format_number({:cpf, cpf})
   end
 
   @doc """
@@ -80,15 +78,15 @@ defmodule Brcpfcnpj do
 
   ## Examples
 
-      iex> Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000160"})
+      iex> Brcpfcnpj.cnpj_format("69103604000160")
       "69.103.604/0001-60"
-      iex> Brcpfcnpj.cnpj_format(%Cnpj{number: "69103604000161"})
+      iex> Brcpfcnpj.cnpj_format("69103604000161")
       nil
 
   """
-  @spec cnpj_format(Cnpj.t()) :: String.t() | nil
-  def cnpj_format(cnpj = %Cnpj{}) do
-    Cpfcnpj.format_number({cnpj.tp_data, cnpj.number})
+  @spec cnpj_format(String.t()) :: String.t() | nil
+  def cnpj_format(cnpj) do
+    Cpfcnpj.format_number({:cnpj, cnpj})
   end
 
   @doc """
@@ -98,9 +96,13 @@ defmodule Brcpfcnpj do
   @spec cpf_generate() :: String.t()
   @spec cpf_generate(boolean()) :: String.t()
   def cpf_generate(format \\ false) do
-    tp_data = %Cpf{}.tp_data
-    cpf = Cpfcnpj.generate(tp_data)
-    if format, do: Cpfcnpj.format_number({tp_data, cpf}), else: cpf
+    cpf = Cpfcnpj.generate(:cpf)
+
+    if format do
+      Cpfcnpj.format_number({:cpf, cpf})
+    else
+      cpf
+    end
   end
 
   @doc """
@@ -110,8 +112,12 @@ defmodule Brcpfcnpj do
   @spec cnpj_generate() :: String.t()
   @spec cnpj_generate(boolean()) :: String.t()
   def cnpj_generate(format \\ false) do
-    tp_data = %Cnpj{}.tp_data
-    cnpj = Cpfcnpj.generate(tp_data)
-    if format, do: Cpfcnpj.format_number({tp_data, cnpj}), else: cnpj
+    cnpj = Cpfcnpj.generate(:cnpj)
+
+    if format do
+      Cpfcnpj.format_number({:cnpj, cnpj})
+    else
+      cnpj
+    end
   end
 end
