@@ -27,7 +27,7 @@ if Code.ensure_compiled(Ecto) do
 
     def validate_cnpj(changeset, field, opts) when is_atom(field) do
       validate(changeset, field, fn value ->
-        if Brcpfcnpj.cnpj_valid?(%Cnpj{number: value}) do
+        if Brcpfcnpj.cnpj_valid?(value) do
           []
         else
           [{field, message(opts, {"Invalid Cnpj", validation: :cnpj})}]
@@ -60,7 +60,7 @@ if Code.ensure_compiled(Ecto) do
 
     def validate_cpf(changeset, field, opts) when is_atom(field) do
       validate(changeset, field, fn value ->
-        if Brcpfcnpj.cpf_valid?(%Cpf{number: value}) do
+        if Brcpfcnpj.cpf_valid?(value) do
           []
         else
           [{field, message(opts, {"Invalid Cpf", validation: :cpf})}]
@@ -81,10 +81,7 @@ if Code.ensure_compiled(Ecto) do
       new = if is_nil(value), do: [], else: validator.(value)
 
       case new do
-        [] ->
-          changeset = %{changeset | errors: Keyword.delete(errors, field)}
-          %{changeset | valid?: Enum.count(changeset.errors) == 0}
-
+        [] -> changeset
         [_ | _] -> %{changeset | errors: new ++ errors, valid?: false}
       end
     end
