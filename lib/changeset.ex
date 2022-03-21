@@ -81,7 +81,9 @@ if Code.ensure_compiled(Ecto) do
       new = if is_nil(value), do: [], else: validator.(value)
 
       case new do
-        [] -> changeset
+        [] ->
+          changeset = %{changeset | errors: Keyword.delete(errors, field)}
+          %{changeset | valid?: Enum.count(changeset.errors) == 0}
         [_ | _] -> %{changeset | errors: new ++ errors, valid?: false}
       end
     end
