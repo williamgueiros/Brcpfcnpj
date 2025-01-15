@@ -4,7 +4,7 @@ defmodule Brcpfcnpj.Mixfile do
   def project do
     [
       app: :brcpfcnpj,
-      version: "2.0.0",
+      version: "2.0.1",
       elixir: "~> 1.7",
       description: description(),
       package: package(),
