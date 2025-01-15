@@ -36,4 +36,14 @@ defmodule CnpjTest do
     assert Brcpfcnpj.cnpj_valid?("00000898246954") == false
     assert Brcpfcnpj.cnpj_valid?("00000136747140") == false
   end
+
+  test "should allow alphanumeric characters in the cnpj" do
+    assert Brcpfcnpj.cnpj_valid?("12.ABC.345/01DE-35") == true
+    assert Brcpfcnpj.cnpj_valid?("12ABC34501DE35") == true
+    assert Brcpfcnpj.cnpj_valid?("12abc34501de35") == true
+  end
+
+  test "should validate alphanumeric characters" do
+    assert Brcpfcnpj.cnpj_valid?("12.ABC.345/01DE-34") == false
+  end
 end

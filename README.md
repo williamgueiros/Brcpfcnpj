@@ -117,6 +117,11 @@ validate_cnpj(:cnpj, message: "Cnpj Inválido")
 
 Em caso de duvida [veja mais detalhes](https://github.com/williamgueiros/Brcpfcnpj/issues/3#issuecomment-191368591).
 
+## CNPJ alfanuméricos
+
+A partir de janeiro de 2026 será possivel ter caracteres alfanuméricos no CNPJ. Essa biblioteca tem suporte para esses caracteres a partir da versão 2.0.0.
+Por favor atualizem a versão antes do prazo entrar em efeito senão poderá acontecer falsos negativos nas validações.
+
 ## Contribuições
 
 * [Diogo Beda](https://github.com/diogobeda)

@@ -4,7 +4,7 @@ defmodule Brcpfcnpj.Mixfile do
   def project do
     [
       app: :brcpfcnpj,
-      version: "1.0.0",
+      version: "2.0.0",
       elixir: "~> 1.7",
       description: description(),
       package: package(),
@@ -19,11 +19,11 @@ defmodule Brcpfcnpj.Mixfile do
   defp deps do
     [
       {:earmark, "~> 1.4", only: [:dev, :docs], runtime: false},
-      {:ex_doc, "~> 0.30", only: [:dev, :docs], runtime: false},
+      {:ex_doc, "~> 0.36", only: [:dev, :docs], runtime: false},
       {:inch_ex, "~> 2.0", only: :docs, runtime: false},
       {:credo, "~> 1.7", only: :dev, runtime: false},
       {:dialyxir, "~> 1.4", only: :dev, runtime: false},
-      {:ecto, "~> 3.11", optional: true}
+      {:ecto, "~> 3.12", optional: true}
     ]
   end
 

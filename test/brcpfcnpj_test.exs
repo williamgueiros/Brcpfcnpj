@@ -8,7 +8,7 @@ defmodule BrcpfcnpjTest do
     assert Brcpfcnpj.cpf_format("11144477735") == "111.444.777-35"
   end
 
-  test "should return the formated to wrong cpf" do
+  test "should return nil to wrong cpf" do
     assert Brcpfcnpj.cpf_format("11144477731") == nil
   end
 
@@ -16,7 +16,11 @@ defmodule BrcpfcnpjTest do
     assert Brcpfcnpj.cnpj_format("69103604000160") == "69.103.604/0001-60"
   end
 
-  test "should return the formated to wrong cnpj" do
+  test "should return the formated alphanumeric cnpj" do
+    assert Brcpfcnpj.cnpj_format("UNZ98FFWCLCV50") == "UN.Z98.FFW/CLCV-50"
+  end
+
+  test "should return nil to the wrong cnpj" do
     assert Brcpfcnpj.cnpj_format("69103604000161") == nil
   end
 
@@ -36,7 +40,12 @@ defmodule BrcpfcnpjTest do
 
   test "should generate a formatted cnpj" do
     cnpj = Brcpfcnpj.cnpj_generate(true)
-    assert Regex.match?(~r/(\d{2})[.]?(\d{3})[.]?(\d{3})[\/]?(\d{4})[-]?(\d{2})/, cnpj)
+
+    assert Regex.match?(
+             ~r/([0-9A-Z]{2})[.]?([0-9A-Z]{3})[.]?([0-9A-Z]{3})[\/]?([0-9A-Z]{4})[-]?([0-9A-Z]{2})/,
+             cnpj
+           )
+
     assert Brcpfcnpj.cnpj_valid?(cnpj)
   end
 

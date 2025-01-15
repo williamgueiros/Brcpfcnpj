@@ -21,7 +21,51 @@ defmodule Cpfcnpj do
   @cnpj_length 14
   @cnpj_algs_1 [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0, 0]
   @cnpj_algs_2 [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0]
-  @cnpj_regex ~r/(\d{2})?(\d{3})?(\d{3})?(\d{4})?(\d{2})/
+  @cnpj_regex ~r/([0-9A-Z]{2})[.]?([0-9A-Z]{3})[.]?([0-9A-Z]{3})[\/]?([0-9A-Z]{4})[-]?([0-9A-Z]{2})/
+
+  @cnpj_characters 48..57
+                   |> Enum.to_list()
+                   |> Kernel.++(Enum.to_list(65..90))
+                   |> Enum.map(&List.wrap(&1))
+
+  @cnpj_character_to_value_map %{
+    "0" => 0,
+    "1" => 1,
+    "2" => 2,
+    "3" => 3,
+    "4" => 4,
+    "5" => 5,
+    "6" => 6,
+    "7" => 7,
+    "8" => 8,
+    "9" => 9,
+    "A" => 17,
+    "B" => 18,
+    "C" => 19,
+    "D" => 20,
+    "E" => 21,
+    "F" => 22,
+    "G" => 23,
+    "H" => 24,
+    "I" => 25,
+    "J" => 26,
+    "K" => 27,
+    "L" => 28,
+    "M" => 29,
+    "N" => 30,
+    "O" => 31,
+    "P" => 32,
+    "Q" => 33,
+    "R" => 34,
+    "S" => 35,
+    "T" => 36,
+    "U" => 37,
+    "V" => 38,
+    "W" => 39,
+    "X" => 40,
+    "Y" => 41,
+    "Z" => 42
+  }
 
   @doc """
   Valida cpf/cnpj caracteres especias não são levados em consideração.
@@ -64,10 +108,10 @@ defmodule Cpfcnpj do
   end
 
   # Checks validation digits
-  defp type_checker(tp_cpfcnpj) do
-    cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[^0-9]/, "")
-    first_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :first})
-    second_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :second})
+  defp type_checker({type, string}) do
+    cpfcnpj = replace_invalid_characters(type, string)
+    first_char_valid = character_valid(cpfcnpj, {type, :first})
+    second_char_valid = character_valid(cpfcnpj, {type, :second})
     verif = first_char_valid <> second_char_valid
     verif == String.slice(cpfcnpj, -2, 2)
   end
@@ -90,7 +134,8 @@ defmodule Cpfcnpj do
       order == "0000" ->
         false
 
-      String.to_integer(order) > 300 and first_three_digits == "000" and basic != "00000000" ->
+      cnpj_alphanumeric_translation(order) > 300 and first_three_digits == "000" and
+          basic != "00000000" ->
         false
 
       true ->
@@ -103,7 +148,7 @@ defmodule Cpfcnpj do
       cpfcnpj
       |> String.codepoints()
       |> Enum.with_index()
-      |> Enum.map(fn {k, v} -> String.to_integer(k) * Enum.at(algs, v) end)
+      |> Enum.map(fn {k, v} -> cnpj_alphanumeric_translation(k) * Enum.at(algs, v) end)
 
     Enum.reduce(mult, 0, &+/2)
   end
@@ -136,9 +181,9 @@ defmodule Cpfcnpj do
 
   """
   @spec format_number({:cpf | :cnpj, String.t()}) :: String.t() | nil
-  def format_number(number_in) do
-    if valid?(number_in) do
-      tp_cpfcnpj = {elem(number_in, 0), String.replace(elem(number_in, 1), ~r/[^0-9]/, "")}
+  def format_number({type, number}) do
+    if valid?({type, number}) do
+      tp_cpfcnpj = {type, String.replace(number, ~r/[^0-9A-Z]/, "")}
 
       case tp_cpfcnpj do
         {:cpf, cpf} ->
@@ -157,7 +202,7 @@ defmodule Cpfcnpj do
   """
   @spec generate(:cpf | :cnpj) :: String.t()
   def generate(tp_cpfcnpj) do
-    numbers = random_numbers(tp_cpfcnpj)
+    numbers = random_characters(tp_cpfcnpj)
     first_valid_char = character_valid(numbers, {tp_cpfcnpj, :first})
     second_valid_char = character_valid(numbers <> first_valid_char, {tp_cpfcnpj, :second})
 
@@ -172,12 +217,44 @@ defmodule Cpfcnpj do
     end
   end
 
-  defp random_numbers(tp_cpfcnpj) do
+  def random_characters(:cpf) do
     random_digit_generator = fn -> Enum.random(0..9) end
 
     random_digit_generator
     |> Stream.repeatedly()
-    |> Enum.take(if(tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
+    |> Enum.take(@cpf_length - 2)
     |> Enum.join()
+  end
+
+  def random_characters(:cnpj) do
+    random_digit_generator = fn ->
+      Enum.random(@cnpj_characters)
+    end
+
+    random_digit_generator
+    |> Stream.repeatedly()
+    |> Enum.take(@cnpj_length - 2)
+    |> Enum.join()
+  end
+
+  # Cnpj pode ter caracteres alfanuméricos, cpf não
+  defp replace_invalid_characters(:cnpj, cnpj) do
+    String.replace(cnpj, ~r/[^a-zA-Z0-9]/, "")
+  end
+
+  defp replace_invalid_characters(:cpf, cpf) do
+    String.replace(cpf, ~r/[^0-9]/, "")
+  end
+
+  defp cnpj_alphanumeric_translation(string) do
+    case String.length(string) do
+      1 ->
+        Map.get(@cnpj_character_to_value_map, String.upcase(string, :ascii))
+
+      _other ->
+        string
+        |> String.codepoints()
+        |> Enum.map(&cnpj_alphanumeric_translation/1)
+    end
   end
 end
