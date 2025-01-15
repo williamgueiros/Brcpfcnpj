@@ -64,10 +64,10 @@ defmodule Cpfcnpj do
   end
 
   # Checks validation digits
-  defp type_checker(tp_cpfcnpj) do
-    cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[^0-9]/, "")
-    first_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :first})
-    second_char_valid = character_valid(cpfcnpj, {elem(tp_cpfcnpj, 0), :second})
+  defp type_checker({type, string}) do
+    cpfcnpj = replace_invalid_characters(type, string)
+    first_char_valid = character_valid(cpfcnpj, {type, :first})
+    second_char_valid = character_valid(cpfcnpj, {type, :second})
     verif = first_char_valid <> second_char_valid
     verif == String.slice(cpfcnpj, -2, 2)
   end
@@ -90,7 +90,8 @@ defmodule Cpfcnpj do
       order == "0000" ->
         false
 
-      String.to_integer(order) > 300 and first_three_digits == "000" and basic != "00000000" ->
+      cnpj_alphanumeric_translation(order) > 300 and first_three_digits == "000" and
+          basic != "00000000" ->
         false
 
       true ->
@@ -103,7 +104,7 @@ defmodule Cpfcnpj do
       cpfcnpj
       |> String.codepoints()
       |> Enum.with_index()
-      |> Enum.map(fn {k, v} -> String.to_integer(k) * Enum.at(algs, v) end)
+      |> Enum.map(fn {k, v} -> cnpj_alphanumeric_translation(k) * Enum.at(algs, v) end)
 
     Enum.reduce(mult, 0, &+/2)
   end
@@ -179,5 +180,66 @@ defmodule Cpfcnpj do
     |> Stream.repeatedly()
     |> Enum.take(if(tp_cpfcnpj == :cpf, do: @cpf_length, else: @cnpj_length) - 2)
     |> Enum.join()
+  end
+
+  # Cnpj pode ter caracteres alfanuméricos, cpf não
+  defp replace_invalid_characters(:cnpj, cnpj) do
+    String.replace(cnpj, ~r/[^a-zA-Z0-9]/, "")
+  end
+
+  defp replace_invalid_characters(:cpf, cpf) do
+    String.replace(cpf, ~r/[^0-9]/, "")
+  end
+
+  defp cnpj_alphanumeric_translation(string) do
+    case String.length(string) do
+      1 ->
+        Map.get(
+          %{
+            "0" => 0,
+            "1" => 1,
+            "2" => 2,
+            "3" => 3,
+            "4" => 4,
+            "5" => 5,
+            "6" => 6,
+            "7" => 7,
+            "8" => 8,
+            "9" => 9,
+            "A" => 17,
+            "B" => 18,
+            "C" => 19,
+            "D" => 20,
+            "E" => 21,
+            "F" => 22,
+            "G" => 23,
+            "H" => 24,
+            "I" => 25,
+            "J" => 26,
+            "K" => 27,
+            "L" => 28,
+            "M" => 29,
+            "N" => 30,
+            "O" => 31,
+            "P" => 32,
+            "Q" => 33,
+            "R" => 34,
+            "S" => 35,
+            "T" => 36,
+            "U" => 37,
+            "V" => 38,
+            "W" => 39,
+            "X" => 40,
+            "Y" => 41,
+            "Z" => 42
+          },
+          String.upcase(string, :ascii)
+        )
+
+      _other ->
+        string
+        |> String.codepoints()
+        |> Enum.map(&cnpj_alphanumeric_translation/1)
+    end
   end
 end

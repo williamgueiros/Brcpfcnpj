@@ -37,4 +37,9 @@ defmodule CpfTest do
   test "should be invalid with nil input" do
     assert Brcpfcnpj.cpf_valid?(nil) == false
   end
+
+  test "should not allow alphanumeric characters" do
+    assert Brcpfcnpj.cpf_valid?("ABC34501D-84") == false
+    assert Brcpfcnpj.cpf_valid?("ABC34501D84") == false
+  end
 end
