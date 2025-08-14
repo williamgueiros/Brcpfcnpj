@@ -250,14 +250,6 @@ defmodule Cpfcnpj do
   end
 
   defp cnpj_alphanumeric_translation(string) do
-    case String.length(string) do
-      1 ->
-        Map.get(@cnpj_character_to_value_map, String.upcase(string, :ascii))
-
-      _other ->
-        string
-        |> String.codepoints()
-        |> Enum.map(&cnpj_alphanumeric_translation/1)
-    end
+    Map.get(@cnpj_character_to_value_map, String.upcase(string, :ascii))
   end
 end
