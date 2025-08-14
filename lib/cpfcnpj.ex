@@ -23,6 +23,8 @@ defmodule Cpfcnpj do
   @cnpj_algs_2 [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0]
   @cnpj_regex ~r/([0-9A-Z]{2})[.]?([0-9A-Z]{3})[.]?([0-9A-Z]{3})[\/]?([0-9A-Z]{4})[-]?([0-9A-Z]{2})/
 
+  @digit_regex ~r/^\d+$/
+
   @cnpj_characters 48..57
                    |> Enum.to_list()
                    |> Kernel.++(Enum.to_list(65..90))
@@ -134,7 +136,8 @@ defmodule Cpfcnpj do
       order == "0000" ->
         false
 
-      cnpj_alphanumeric_translation(order) > 300 and first_three_digits == "000" and
+      Regex.match?(@digit_regex, order) and String.to_integer(order) > 300 and
+        first_three_digits == "000" and
           basic != "00000000" ->
         false
 
@@ -247,14 +250,6 @@ defmodule Cpfcnpj do
   end
 
   defp cnpj_alphanumeric_translation(string) do
-    case String.length(string) do
-      1 ->
-        Map.get(@cnpj_character_to_value_map, String.upcase(string, :ascii))
-
-      _other ->
-        string
-        |> String.codepoints()
-        |> Enum.map(&cnpj_alphanumeric_translation/1)
-    end
+    Map.get(@cnpj_character_to_value_map, String.upcase(string, :ascii))
   end
 end

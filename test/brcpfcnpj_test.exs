@@ -38,6 +38,16 @@ defmodule BrcpfcnpjTest do
     assert Brcpfcnpj.cpf_valid?(cpf)
   end
 
+  test "should correctly validate a valid cnpj starting with '000'" do
+    valid_cnpj = "00012345000165"
+    assert Brcpfcnpj.cnpj_valid?(valid_cnpj)
+  end
+
+  test "should correctly validate a invalid cnpj starting with '000'" do
+    invalid_cnpj = "00012345030153"
+    refute Brcpfcnpj.cnpj_valid?(invalid_cnpj)
+  end
+
   test "should generate a formatted cnpj" do
     cnpj = Brcpfcnpj.cnpj_generate(true)
 
