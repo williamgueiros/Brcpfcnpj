@@ -11,3 +11,5 @@ erl_crash.dump
 *.ez
 .idea/
 brcpfcnpj-*.tar
+
+.expert/

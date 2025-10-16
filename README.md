@@ -46,6 +46,9 @@ Brcpfcnpj.cnpj_valid?(cnpj)# ==> true
 
 cnpj = "69.103.604/0001-60"
 Brcpfcnpj.cnpj_valid?(cnpj)# ==> true
+
+cnpj = "12ABC34501DE35"
+Brcpfcnpj.cnpj_valid?(cnpj)# ==> true
 ````
 
 ## Formatando a String
@@ -80,6 +83,12 @@ Brcpfcnpj.cpf_generate(true)
 
 Brcpfcnpj.cnpj_generate(true)
 "45.044.251/6215-69"
+
+Brcpfcnpj.cnpj_generate(true)
+"45.044.251/6215-69"
+
+Brcpfcnpj.cnpj_generate(true)
+"6K.ZBP.GHM/4V7K-39"
 ````
 
 Sem formatação:
@@ -90,6 +99,9 @@ Brcpfcnpj.cpf_generate()
 
 Brcpfcnpj.cnpj_generate()
 "17463578863541"
+
+Brcpfcnpj.cnpj_generate()
+"HKW8ZUAH582899"
 ````
 
 ## Ecto
