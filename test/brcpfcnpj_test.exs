@@ -20,6 +20,10 @@ defmodule BrcpfcnpjTest do
     assert Brcpfcnpj.cnpj_format("UNZ98FFWCLCV50") == "UN.Z98.FFW/CLCV-50"
   end
 
+  test "should accept cnpj with lowercase alphanumeric numbers" do
+    assert Brcpfcnpj.cnpj_format("eglux3vv2v5p04") == "eg.lux.3vv/2v5p-04"
+  end
+
   test "should return nil to the wrong cnpj" do
     assert Brcpfcnpj.cnpj_format("69103604000161") == nil
   end

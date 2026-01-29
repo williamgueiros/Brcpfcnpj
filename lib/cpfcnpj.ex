@@ -21,7 +21,7 @@ defmodule Cpfcnpj do
   @cnpj_length 14
   @cnpj_algs_1 [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0, 0]
   @cnpj_algs_2 [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0]
-  @cnpj_regex ~r/([0-9A-Z]{2})[.]?([0-9A-Z]{3})[.]?([0-9A-Z]{3})[\/]?([0-9A-Z]{4})[-]?([0-9A-Z]{2})/
+  @cnpj_regex ~r/([0-9A-Za-z]{2})[.]?([0-9A-Za-z]{3})[.]?([0-9A-Za-z]{3})[\/]?([0-9A-Za-z]{4})[-]?([0-9A-Za-z]{2})/
 
   @digit_regex ~r/^\d+$/
 
@@ -184,17 +184,21 @@ defmodule Cpfcnpj do
 
   """
   @spec format_number({:cpf | :cnpj, String.t()}) :: String.t() | nil
-  def format_number({type, number}) do
-    if valid?({type, number}) do
-      tp_cpfcnpj = {type, String.replace(number, ~r/[^0-9A-Z]/, "")}
+  def format_number({:cpf, string}) do
+    if valid?({:cpf, string}) do
+      string
+      |> String.replace(~r/[^0-9A-Z]/, "")
+      |> then(&Regex.replace(@cpf_regex, &1, "\\1.\\2.\\3-\\4"))
+    else
+      nil
+    end
+  end
 
-      case tp_cpfcnpj do
-        {:cpf, cpf} ->
-          Regex.replace(@cpf_regex, cpf, "\\1.\\2.\\3-\\4")
-
-        {:cnpj, cnpj} ->
-          Regex.replace(@cnpj_regex, cnpj, "\\1.\\2.\\3/\\4-\\5")
-      end
+  def format_number({:cnpj, string}) do
+    if valid?({:cnpj, string}) do
+      string
+      |> String.replace(~r/[^0-9A-Za-z]/, "")
+      |> then(&Regex.replace(@cnpj_regex, &1, "\\1.\\2.\\3/\\4-\\5"))
     else
       nil
     end
