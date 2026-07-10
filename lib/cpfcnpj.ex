@@ -100,7 +100,7 @@ defmodule Cpfcnpj do
     correct_length? =
       case tp_cpfcnpj do
         {:cpf, _} ->
-          String.length(cpfcnpj) == @cpf_length
+          String.length(cpfcnpj) == @cpf_length and Regex.match?(@digit_regex, cpfcnpj)
 
         {:cnpj, _} ->
           String.length(cpfcnpj) == @cnpj_length
