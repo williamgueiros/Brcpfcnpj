@@ -43,7 +43,7 @@ defmodule CpfTest do
     assert Brcpfcnpj.cpf_valid?("ABC34501D84") == false
   end
 
-  test "should be invalid when an 11-char string contains letters (issue #56)" do
+  test "should be invalid when an 11-char string contains letters" do
     cpfs = ~w{
       0000invalid 0000INVALID 00000invali 000000nvali 0000000vali
       00000000ali 000000000li 0000000000i 000invalid0 00invalid00
