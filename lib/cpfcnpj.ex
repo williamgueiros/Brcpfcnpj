@@ -88,8 +88,9 @@ defmodule Cpfcnpj do
   end
 
   # Checks length and if all are equal
-  defp check_number(tp_cpfcnpj) do
-    cpfcnpj = String.replace(elem(tp_cpfcnpj, 1), ~r/[\.\/-]/, "")
+  defp check_number({type, string}) do
+    cpfcnpj = String.replace(string, ~r/[\.\/-]/, "")
+    cpfcnpj_with_only_valid_characters = replace_invalid_characters(type, string)
 
     all_equal? =
       cpfcnpj
@@ -97,17 +98,13 @@ defmodule Cpfcnpj do
       |> String.length()
       |> Kernel.==(0)
 
-    correct_length? =
-      case tp_cpfcnpj do
-        {:cpf, _} ->
-          String.length(cpfcnpj) == @cpf_length
-
-        {:cnpj, _} ->
-          String.length(cpfcnpj) == @cnpj_length
-      end
-
-    correct_length? and not all_equal?
+    correct_length = check_length(type, cpfcnpj)
+    correct_length_only_valid = check_length(type, cpfcnpj_with_only_valid_characters)
+    correct_length and correct_length_only_valid and not all_equal?
   end
+
+  defp check_length(:cpf, cpf), do: String.length(cpf) == @cpf_length
+  defp check_length(:cnpj, cnpj), do: String.length(cnpj) == @cnpj_length
 
   # Checks validation digits
   defp type_checker({type, string}) do
